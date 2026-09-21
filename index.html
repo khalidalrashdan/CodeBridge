@@ -359,6 +359,15 @@
             );
             border-radius: 15px;
             border: 2px solid var(--primary);
+            color: #222;
+        }
+
+        .complete h2,
+        .complete h3,
+        .complete p,
+        .complete strong,
+        .complete span {
+            color: inherit;
         }
 
         .complete-icon {
@@ -368,7 +377,7 @@
         .celebration {
             font-size: 28px;
             font-weight: bold;
-            color: var(--primary);
+            color: var(--primary) !important;
         }
 
         hr {
@@ -818,10 +827,10 @@
 
         <h2>Course Complete! 🎉</h2>
 
-        <h3>🥳 Congratulations!</h3>
+        <h3>🎉 Congratulations!</h3>
 
         <p>
-            You completed all 4 Java challenges! 🚀
+            You completed all 4 Java challenges.
         </p>
 
         <p>
@@ -850,7 +859,11 @@
         </p>
 
         <p class="celebration" id="celebrationMessage">
-            🎉🏆🥳 YOU ARE A JAVA MASTER! 🥳🏆🎉
+            🎉🥳 Amazing work! 🥳🎉
+        </p>
+
+        <p>
+            You completed the CodeBridge Java Fundamentals course!
         </p>
 
         <p>
@@ -858,7 +871,7 @@
         </p>
 
         <p>
-            ❤️ Thank you for using <strong>CodeBridge</strong>!
+            Thank you for using <strong>CodeBridge</strong>! ❤️
         </p>
 
     </div>
@@ -882,7 +895,9 @@
             background1: "#1f2937",
             background2: "#374151",
             background3: "#111827",
-            lesson: "#f3f4f6"
+            lesson: "#f3f4f6",
+            completeBackground: "linear-gradient(135deg, #111111, #1f2937)",
+            completeText: "#ffffff"
         },
 
         football: {
@@ -893,7 +908,9 @@
             background1: "#dcfce7",
             background2: "#bbf7d0",
             background3: "#ecfccb",
-            lesson: "#f0fdf4"
+            lesson: "#f0fdf4",
+            completeBackground: "linear-gradient(135deg, #dcfce7, #bbf7d0)",
+            completeText: "#222222"
         },
 
         disney: {
@@ -904,7 +921,9 @@
             background1: "#ede9fe",
             background2: "#fce7f3",
             background3: "#fef3c7",
-            lesson: "#faf5ff"
+            lesson: "#faf5ff",
+            completeBackground: "linear-gradient(135deg, #ede9fe, #fce7f3)",
+            completeText: "#222222"
         }
     };
 
@@ -955,6 +974,24 @@
             "--lesson",
             selected.lesson
         );
+
+        const complete = document.querySelector(".complete");
+
+        complete.style.background =
+            selected.completeBackground;
+
+        complete.style.color =
+            selected.completeText;
+
+        complete
+            .querySelectorAll("h2, h3, p, strong, span")
+            .forEach(element => {
+                element.style.color =
+                    selected.completeText;
+            });
+
+        document.getElementById("celebrationMessage").style.color =
+            selected.accent;
 
         document.getElementById("themeMessage").innerHTML =
             "🎮✨ Theme selected: " + selected.name + "!";
@@ -1177,7 +1214,7 @@
                     document.getElementById(
                         "celebrationMessage"
                     ).innerHTML =
-                        "🎉🏆🥳 YOU ARE A JAVA MASTER! 🥳🏆🎉";
+                        "🎉🥳 Amazing work! 🥳🎉";
 
                     updateBadges();
                 }
