@@ -1,387 +1,612 @@
-Sure — here is the **HTML-only version**, with all CSS removed. It keeps the same content and written questions, and the JavaScript is included so the answer buttons still work.
-
-```
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeBridge - Java Fundamentals</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        h2 {
+            color: #1d4ed8;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        .welcome {
+            text-align: center;
+        }
+
+        .lesson {
+            margin-top: 30px;
+            padding: 25px;
+            border-left: 5px solid #2563eb;
+            background-color: #f8fafc;
+        }
+
+        pre {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 15px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: #16a34a;
+        }
+
+        .incorrect {
+            color: #dc2626;
+        }
+
+        .complete {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #eff6ff;
+            border-radius: 10px;
+        }
+
+        hr {
+            margin: 35px 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+    </style>
 </head>
 
 <body>
 
+<div class="container">
+
     <h1>CODEBRIDGE</h1>
-    <h2>Java Fundamentals</h2>
+    <h2 style="text-align: center;">Java Fundamentals</h2>
 
-    <p>
-        Welcome to CodeBridge!<br>
-        Learn the fundamentals of Java through four simple lessons.
-    </p>
+    <div class="welcome">
 
-    <label for="studentName">Enter your name:</label>
-    <input type="text" id="studentName">
+        <p>
+            Welcome to CodeBridge!<br>
+            Learn the fundamentals of Java through four simple lessons.
+        </p>
 
-    <br><br>
+        <label for="studentName">
+            <strong>Enter your name:</strong>
+        </label>
 
-    <button onclick="startCourse()">Start Course</button>
+        <br><br>
 
-    <p id="welcomeMessage"></p>
+        <input
+            type="text"
+            id="studentName"
+            placeholder="Enter your name"
+        >
 
-    <hr>
+        <br><br>
 
-    <!-- Lesson 1 -->
-    <h2>Lesson 1: Variables</h2>
+        <button onclick="startCourse()">
+            Start Course
+        </button>
 
-    <p>
-        A variable is used to store information.
-    </p>
+        <p id="welcomeMessage"></p>
 
-    <p><strong>Example:</strong></p>
-
-    <pre>
-int age = 15;
-    </pre>
-
-    <p>
-        Here, <strong>age</strong> stores the number <strong>15</strong>.
-    </p>
-
-    <h3>Question</h3>
-
-    <p>
-        Write a Java statement that creates an integer variable called
-        <strong>age</strong> and assigns it the value <strong>15</strong>.
-    </p>
-
-    <p><strong>Your answer:</strong></p>
-
-    <textarea id="answer1" rows="5" cols="50"
-        placeholder="Write your Java code here..."></textarea>
-
-    <br><br>
-
-    <button onclick="checkAnswer(1)">Submit Answer</button>
-
-    <p id="feedback1"></p>
+    </div>
 
     <hr>
 
-    <!-- Lesson 2 -->
-    <h2>Lesson 2: Data Types</h2>
+    <!-- LESSON 1 -->
 
-    <p>
-        Java has different data types.
-    </p>
+    <div class="lesson">
 
-    <ul>
-        <li><strong>String</strong> stores text.</li>
-        <li><strong>int</strong> stores whole numbers.</li>
-        <li><strong>double</strong> stores decimal numbers.</li>
-        <li><strong>boolean</strong> stores true or false.</li>
-    </ul>
+        <h2>Lesson 1: Variables</h2>
 
-    <h3>Question</h3>
+        <p>
+            A variable is used to store information.
+        </p>
 
-    <p>
-        Write a Java statement that creates a <strong>String</strong>
-        variable called <strong>name</strong> and stores your name in it.
-    </p>
+        <p><strong>Example:</strong></p>
 
-    <p>
-        For example, if your name is Alex, the variable should store
-        <strong>"Alex"</strong>.
-    </p>
+        <pre>
+int age = 15;</pre>
 
-    <p><strong>Your answer:</strong></p>
+        <p>
+            Here, <strong>age</strong> stores the number <strong>15</strong>.
+        </p>
 
-    <textarea id="answer2" rows="5" cols="50"
-        placeholder='Example: String name = "Alex";'></textarea>
+        <h3>Question</h3>
 
-    <br><br>
+        <p>
+            Write a Java statement that creates an integer variable called
+            <strong>age</strong> and assigns it the value <strong>15</strong>.
+        </p>
 
-    <button onclick="checkAnswer(2)">Submit Answer</button>
+        <p><strong>Your answer:</strong></p>
 
-    <p id="feedback2"></p>
+        <textarea
+            id="answer1"
+            rows="5"
+            placeholder="Write your Java code here..."
+        ></textarea>
+
+        <br>
+
+        <button onclick="checkAnswer(1)">
+            Submit Answer
+        </button>
+
+        <p id="feedback1" class="feedback"></p>
+
+    </div>
 
     <hr>
 
-    <!-- Lesson 3 -->
-    <h2>Lesson 3: If Statements</h2>
+    <!-- LESSON 2 -->
 
-    <p>
-        An if statement allows a program to make decisions.
-    </p>
+    <div class="lesson">
 
-    <p><strong>Example:</strong></p>
+        <h2>Lesson 2: Data Types</h2>
 
-    <pre>
+        <p>
+            Java has different data types.
+        </p>
+
+        <p>
+            <strong>String</strong> stores text.
+        </p>
+
+        <p>
+            <strong>int</strong> stores whole numbers.
+        </p>
+
+        <p>
+            <strong>double</strong> stores decimal numbers.
+        </p>
+
+        <p>
+            <strong>boolean</strong> stores true or false.
+        </p>
+
+        <h3>Question</h3>
+
+        <p>
+            Write a Java statement that creates a
+            <strong>String</strong> variable called
+            <strong>name</strong> and stores your name in it.
+        </p>
+
+        <p>
+            For example, if your name is Alex, the variable should store
+            <strong>"Alex"</strong>.
+        </p>
+
+        <p><strong>Your answer:</strong></p>
+
+        <textarea
+            id="answer2"
+            rows="5"
+            placeholder='Example: String name = "Alex";'
+        ></textarea>
+
+        <br>
+
+        <button onclick="checkAnswer(2)">
+            Submit Answer
+        </button>
+
+        <p id="feedback2" class="feedback"></p>
+
+    </div>
+
+    <hr>
+
+    <!-- LESSON 3 -->
+
+    <div class="lesson">
+
+        <h2>Lesson 3: If Statements</h2>
+
+        <p>
+            An if statement allows a program to make decisions.
+        </p>
+
+        <p><strong>Example:</strong></p>
+
+        <pre>
 if (age >= 18) {
     System.out.println("Adult");
-}
-    </pre>
+}</pre>
 
-    <h3>Question</h3>
+        <h3>Question</h3>
 
-    <p>
-        Write a Java <strong>if statement</strong> that checks whether
-        the variable <strong>age</strong> is greater than or equal to
-        <strong>18</strong>.
-    </p>
+        <p>
+            Write a Java <strong>if statement</strong> that checks whether
+            the variable <strong>age</strong> is greater than or equal to
+            <strong>18</strong>.
+        </p>
 
-    <p>
-        If the condition is true, the program should print:
-    </p>
+        <p>
+            If the condition is true, the program should print:
+        </p>
 
-    <pre>
-Adult
-    </pre>
+        <pre>
+Adult</pre>
 
-    <p><strong>Your answer:</strong></p>
+        <p><strong>Your answer:</strong></p>
 
-    <textarea id="answer3" rows="8" cols="50"
-        placeholder="Write your if statement here..."></textarea>
+        <textarea
+            id="answer3"
+            rows="8"
+            placeholder="Write your if statement here..."
+        ></textarea>
 
-    <br><br>
+        <br>
 
-    <button onclick="checkAnswer(3)">Submit Answer</button>
+        <button onclick="checkAnswer(3)">
+            Submit Answer
+        </button>
 
-    <p id="feedback3"></p>
+        <p id="feedback3" class="feedback"></p>
+
+    </div>
 
     <hr>
 
-    <!-- Lesson 4 -->
-    <h2>Lesson 4: Loops</h2>
+    <!-- LESSON 4 -->
 
-    <p>
-        A loop repeats code multiple times.
-    </p>
+    <div class="lesson">
 
-    <p><strong>Example:</strong></p>
+        <h2>Lesson 4: Loops</h2>
 
-    <pre>
+        <p>
+            A loop repeats code multiple times.
+        </p>
+
+        <p><strong>Example:</strong></p>
+
+        <pre>
 for (int i = 0; i < 5; i++) {
     System.out.println(i);
-}
-    </pre>
+}</pre>
 
-    <h3>Question</h3>
+        <h3>Question</h3>
 
-    <p>
-        Write a Java <strong>for loop</strong> that runs 5 times.
-    </p>
+        <p>
+            Write a Java <strong>for loop</strong> that runs 5 times.
+        </p>
 
-    <p>
-        The loop should start at <strong>0</strong> and increase the
-        variable <strong>i</strong> by <strong>1</strong> each time.
-    </p>
+        <p>
+            The loop should start at <strong>0</strong> and increase the
+            variable <strong>i</strong> by <strong>1</strong> each time.
+        </p>
 
-    <p>
-        Inside the loop, print the value of <strong>i</strong>.
-    </p>
+        <p>
+            Inside the loop, print the value of <strong>i</strong>.
+        </p>
 
-    <p><strong>Your answer:</strong></p>
+        <p><strong>Your answer:</strong></p>
 
-    <textarea id="answer4" rows="8" cols="50"
-        placeholder="Write your for loop here..."></textarea>
+        <textarea
+            id="answer4"
+            rows="8"
+            placeholder="Write your for loop here..."
+        ></textarea>
 
-    <br><br>
+        <br>
 
-    <button onclick="checkAnswer(4)">Submit Answer</button>
+        <button onclick="checkAnswer(4)">
+            Submit Answer
+        </button>
 
-    <p id="feedback4"></p>
+        <p id="feedback4" class="feedback"></p>
+
+    </div>
 
     <hr>
 
-    <!-- Course Complete -->
-    <h2>Course Complete!</h2>
+    <!-- COURSE COMPLETE -->
 
-    <h3>Congratulations!</h3>
+    <div class="complete">
 
-    <p>
-        You completed all 4 lessons.
-    </p>
+        <h2>Course Complete!</h2>
 
-    <p>
-        <strong>Course:</strong> Java Fundamentals
-    </p>
+        <h3>Congratulations!</h3>
 
-    <p>
-        <strong>Progress:</strong>
-        <span id="progress">0 / 4 lessons completed</span>
-    </p>
+        <p>
+            You completed all 4 lessons.
+        </p>
 
-    <p>
-        <strong>Score:</strong>
-        <span id="score">0 / 4</span>
-    </p>
+        <p>
+            <strong>Course:</strong> Java Fundamentals
+        </p>
 
-    <h2>🎉 Congratulations!</h2>
+        <p>
+            <strong>Progress:</strong>
+            <span id="progress">
+                0 / 4 lessons completed
+            </span>
+        </p>
 
-    <p>
-        You completed the CodeBridge Java Fundamentals course.
-    </p>
+        <p>
+            <strong>Score:</strong>
+            <span id="score">
+                0 / 4
+            </span>
+        </p>
 
-    <p>
-        Thank you for using CodeBridge!
-    </p>
+        <h2>🎉 Congratulations!</h2>
 
-    <script>
+        <p>
+            You completed the CodeBridge Java Fundamentals course.
+        </p>
 
-        let completedLessons = 0;
-        let score = 0;
+        <p>
+            Thank you for using CodeBridge!
+        </p>
 
-        function startCourse() {
+    </div>
 
-            let name = document.getElementById("studentName").value;
+</div>
 
-            if (name.trim() === "") {
+<script>
 
-                document.getElementById("welcomeMessage").innerHTML =
-                    "Please enter your name.";
+    let completedLessons = 0;
+    let score = 0;
+
+    function startCourse() {
+
+        let name =
+            document.getElementById("studentName").value;
+
+        let message =
+            document.getElementById("welcomeMessage");
+
+        if (name.trim() === "") {
+
+            message.innerHTML =
+                "Please enter your name.";
+
+            message.className =
+                "incorrect";
+
+        } else {
+
+            message.innerHTML =
+                "Welcome, " + name +
+                "! Good luck with the course.";
+
+            message.className =
+                "correct";
+
+        }
+
+    }
+
+    function cleanCode(code) {
+
+        return code
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .trim();
+
+    }
+
+    function checkAnswer(questionNumber) {
+
+        let answer =
+            document.getElementById(
+                "answer" + questionNumber
+            ).value;
+
+        let feedback =
+            document.getElementById(
+                "feedback" + questionNumber
+            );
+
+        let code = cleanCode(answer);
+
+        let isCorrect = false;
+
+        /* Lesson 1 */
+
+        if (questionNumber === 1) {
+
+            if (
+                code === "intage=15;" ||
+                code === "intage=15"
+            ) {
+
+                isCorrect = true;
+
+                feedback.innerHTML =
+                    "Correct! You created an integer variable called age with the value 15.";
 
             } else {
 
-                document.getElementById("welcomeMessage").innerHTML =
-                    "Welcome, " + name + "! Good luck with the course.";
+                feedback.innerHTML =
+                    "Not quite. Make sure you use: int age = 15;";
 
             }
 
         }
 
-        function cleanCode(code) {
+        /* Lesson 2 */
 
-            return code
-                .toLowerCase()
-                .replace(/\s+/g, "")
-                .trim();
+        if (questionNumber === 2) {
 
-        }
+            if (
+                code.includes("stringname=") &&
+                code.includes("\"")
+            ) {
 
-        function checkAnswer(questionNumber) {
+                isCorrect = true;
 
-            let answer =
-                document.getElementById("answer" + questionNumber).value;
+                feedback.innerHTML =
+                    "Correct! You created a String variable called name.";
 
-            let feedback =
-                document.getElementById("feedback" + questionNumber);
+            } else {
 
-            let code = cleanCode(answer);
-
-            let isCorrect = false;
-
-            /* Lesson 1 */
-
-            if (questionNumber === 1) {
-
-                if (code === "intage=15;" || code === "intage=15") {
-
-                    isCorrect = true;
-
-                    feedback.innerHTML =
-                        "Correct! You created an integer variable called age with the value 15.";
-
-                } else {
-
-                    feedback.innerHTML =
-                        "Not quite. Make sure you use: int age = 15;";
-
-                }
-
-            }
-
-            /* Lesson 2 */
-
-            if (questionNumber === 2) {
-
-                if (
-                    code.includes("stringname=") &&
-                    code.includes("\"")
-                ) {
-
-                    isCorrect = true;
-
-                    feedback.innerHTML =
-                        "Correct! You created a String variable called name.";
-
-                } else {
-
-                    feedback.innerHTML =
-                        'Not quite. Make sure you use String name = "YourName";';
-
-                }
-
-            }
-
-            /* Lesson 3 */
-
-            if (questionNumber === 3) {
-
-                if (
-                    code.includes("if(age>=18)") &&
-                    code.includes("system.out.println(\"adult\")")
-                ) {
-
-                    isCorrect = true;
-
-                    feedback.innerHTML =
-                        'Correct! Your if statement checks whether age is at least 18.';
-
-                } else {
-
-                    feedback.innerHTML =
-                        'Not quite. Check the condition age >= 18 and print "Adult".';
-
-                }
-
-            }
-
-            /* Lesson 4 */
-
-            if (questionNumber === 4) {
-
-                if (
-                    code.includes("for(inti=0;i<5;i++)") &&
-                    code.includes("system.out.println(i)")
-                ) {
-
-                    isCorrect = true;
-
-                    feedback.innerHTML =
-                        "Correct! Your for loop runs 5 times and prints i.";
-
-                } else {
-
-                    feedback.innerHTML =
-                        "Not quite. Start i at 0, use i < 5, increase i by 1, and print i.";
-
-                }
-
-            }
-
-            /* Update score only once */
-
-            if (isCorrect) {
-
-                if (!feedback.dataset.completed) {
-
-                    completedLessons++;
-                    score++;
-
-                    feedback.dataset.completed = "true";
-
-                    document.getElementById("progress").innerHTML =
-                        completedLessons + " / 4 lessons completed";
-
-                    document.getElementById("score").innerHTML =
-                        score + " / 4";
-                }
+                feedback.innerHTML =
+                    'Not quite. Make sure you use String name = "YourName";';
 
             }
 
         }
 
-    </script>
+        /* Lesson 3 */
+
+        if (questionNumber === 3) {
+
+            if (
+                code.includes("if(age>=18)") &&
+                code.includes(
+                    "system.out.println(\"adult\")"
+                )
+            ) {
+
+                isCorrect = true;
+
+                feedback.innerHTML =
+                    "Correct! Your if statement checks whether age is at least 18.";
+
+            } else {
+
+                feedback.innerHTML =
+                    'Not quite. Check the condition age >= 18 and print "Adult".';
+
+            }
+
+        }
+
+        /* Lesson 4 */
+
+        if (questionNumber === 4) {
+
+            if (
+                code.includes(
+                    "for(inti=0;i<5;i++)"
+                ) &&
+                code.includes(
+                    "system.out.println(i)"
+                )
+            ) {
+
+                isCorrect = true;
+
+                feedback.innerHTML =
+                    "Correct! Your for loop runs 5 times and prints i.";
+
+            } else {
+
+                feedback.innerHTML =
+                    "Not quite. Start i at 0, use i < 5, increase i by 1, and print i.";
+
+            }
+
+        }
+
+        /* Update score */
+
+        if (isCorrect) {
+
+            feedback.className =
+                "feedback correct";
+
+            if (!feedback.dataset.completed) {
+
+                completedLessons++;
+                score++;
+
+                feedback.dataset.completed =
+                    "true";
+
+                document.getElementById(
+                    "progress"
+                ).innerHTML =
+                    completedLessons +
+                    " / 4 lessons completed";
+
+                document.getElementById(
+                    "score"
+                ).innerHTML =
+                    score + " / 4";
+
+            }
+
+        } else {
+
+            feedback.className =
+                "feedback incorrect";
+
+        }
+
+    }
+
+</script>
 
 </body>
 </html>
