@@ -352,11 +352,6 @@
             text-align: center;
             margin-top: 40px;
             padding: 30px;
-            background: linear-gradient(
-                135deg,
-                var(--background1),
-                var(--background2)
-            );
             border-radius: 15px;
             border: 2px solid var(--primary);
             color: #222;
@@ -377,7 +372,41 @@
         .celebration {
             font-size: 28px;
             font-weight: bold;
-            color: var(--primary) !important;
+        }
+
+        .f1-complete {
+            background: linear-gradient(
+                135deg,
+                #050505,
+                #111111,
+                #1f2937
+            ) !important;
+
+            border: 3px solid #e10600 !important;
+
+            color: #ffffff !important;
+
+            box-shadow:
+                0 0 25px rgba(225, 6, 0, 0.35),
+                inset 0 0 30px rgba(255, 255, 255, 0.03);
+        }
+
+        .f1-complete h2,
+        .f1-complete h3,
+        .f1-complete p,
+        .f1-complete strong,
+        .f1-complete span {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .f1-complete .celebration {
+            color: #ffcc00 !important;
+            -webkit-text-fill-color: #ffcc00 !important;
+        }
+
+        .f1-complete .complete-icon {
+            color: #ffffff !important;
         }
 
         hr {
@@ -449,15 +478,13 @@
                 id="theme-f1"
                 onclick="selectTheme('f1')"
             >
-
                 <img
                     class="theme-image"
                     src="https://miro.medium.com/v2/resize%3Afit%3A1358/format%3Awebp/0%2A7N38xY1UcvmAeAm7.jpg"
-                    alt="🏎️ F1 racing car"
+                    alt="F1 Racing"
                 >
 
                 <div class="theme-content">
-
                     <div class="theme-icon">
                         🏎️🏁
                     </div>
@@ -469,9 +496,7 @@
                     <p class="theme-description">
                         🏁 Race your way to Java mastery!
                     </p>
-
                 </div>
-
             </div>
 
             <div
@@ -479,15 +504,13 @@
                 id="theme-football"
                 onclick="selectTheme('football')"
             >
-
                 <img
                     class="theme-image"
                     src="https://www.prazdninyvostrave.cz/storage/QIgHSdzI8zkvOsYSaP7P8OAAXL8jwhcjlUBFAHrJ.png"
-                    alt="⚽ Football stadium"
+                    alt="Football"
                 >
 
                 <div class="theme-content">
-
                     <div class="theme-icon">
                         ⚽🥅
                     </div>
@@ -499,9 +522,7 @@
                     <p class="theme-description">
                         ⚽ Score points and master Java!
                     </p>
-
                 </div>
-
             </div>
 
             <div
@@ -509,15 +530,13 @@
                 id="theme-disney"
                 onclick="selectTheme('disney')"
             >
-
                 <img
                     class="theme-image"
                     src="https://theartshouse.org/wp-content/uploads/2025/06/disney-castles.jpg"
-                    alt="🏰 Disney castle"
+                    alt="Disney"
                 >
 
                 <div class="theme-content">
-
                     <div class="theme-icon">
                         🏰✨
                     </div>
@@ -529,9 +548,7 @@
                     <p class="theme-description">
                         ✨ Enter a magical coding adventure!
                     </p>
-
                 </div>
-
             </div>
 
         </div>
@@ -821,13 +838,19 @@
 
     <hr>
 
-    <div class="complete">
+    <div class="complete" id="courseComplete">
 
-        <div class="complete-icon">🎓🏆</div>
+        <div class="complete-icon">
+            🎓🏆
+        </div>
 
-        <h2>Course Complete! 🎉</h2>
+        <h2>
+            Course Complete!
+        </h2>
 
-        <h3>🎉 Congratulations!</h3>
+        <h3>
+            🎉 Congratulations!
+        </h3>
 
         <p>
             You completed all 4 Java challenges.
@@ -895,9 +918,7 @@
             background1: "#1f2937",
             background2: "#374151",
             background3: "#111827",
-            lesson: "#f3f4f6",
-            completeBackground: "linear-gradient(135deg, #111111, #1f2937)",
-            completeText: "#ffffff"
+            lesson: "#f3f4f6"
         },
 
         football: {
@@ -908,9 +929,7 @@
             background1: "#dcfce7",
             background2: "#bbf7d0",
             background3: "#ecfccb",
-            lesson: "#f0fdf4",
-            completeBackground: "linear-gradient(135deg, #dcfce7, #bbf7d0)",
-            completeText: "#222222"
+            lesson: "#f0fdf4"
         },
 
         disney: {
@@ -921,9 +940,7 @@
             background1: "#ede9fe",
             background2: "#fce7f3",
             background3: "#fef3c7",
-            lesson: "#faf5ff",
-            completeBackground: "linear-gradient(135deg, #ede9fe, #fce7f3)",
-            completeText: "#222222"
+            lesson: "#faf5ff"
         }
     };
 
@@ -975,26 +992,87 @@
             selected.lesson
         );
 
-        const complete = document.querySelector(".complete");
+        const complete =
+            document.getElementById("courseComplete");
 
-        complete.style.background =
-            selected.completeBackground;
+        if (theme === "f1") {
+            complete.classList.add("f1-complete");
 
-        complete.style.color =
-            selected.completeText;
+            complete.style.background =
+                "linear-gradient(135deg, #050505, #111111, #1f2937)";
 
-        complete
-            .querySelectorAll("h2, h3, p, strong, span")
-            .forEach(element => {
-                element.style.color =
-                    selected.completeText;
-            });
+            complete.style.color =
+                "#ffffff";
 
-        document.getElementById("celebrationMessage").style.color =
-            selected.accent;
+            complete
+                .querySelectorAll("h2, h3, p, strong, span")
+                .forEach(element => {
+                    element.style.setProperty(
+                        "color",
+                        "#ffffff",
+                        "important"
+                    );
+
+                    element.style.setProperty(
+                        "-webkit-text-fill-color",
+                        "#ffffff",
+                        "important"
+                    );
+                });
+
+            document
+                .getElementById("celebrationMessage")
+                .style.setProperty(
+                    "color",
+                    "#ffcc00",
+                    "important"
+                );
+
+            document
+                .getElementById("celebrationMessage")
+                .style.setProperty(
+                    "-webkit-text-fill-color",
+                    "#ffcc00",
+                    "important"
+                );
+
+        } else {
+            complete.classList.remove("f1-complete");
+
+            complete.style.background =
+                "linear-gradient(135deg, " +
+                selected.background1 +
+                ", " +
+                selected.background2 +
+                ")";
+
+            complete.style.color =
+                "#222222";
+
+            complete
+                .querySelectorAll("h2, h3, p, strong, span")
+                .forEach(element => {
+                    element.style.removeProperty("color");
+                    element.style.removeProperty(
+                        "-webkit-text-fill-color"
+                    );
+                });
+
+            document
+                .getElementById("celebrationMessage")
+                .style.removeProperty("color");
+
+            document
+                .getElementById("celebrationMessage")
+                .style.removeProperty(
+                    "-webkit-text-fill-color"
+                );
+        }
 
         document.getElementById("themeMessage").innerHTML =
-            "🎮✨ Theme selected: " + selected.name + "!";
+            "🎮✨ Theme selected: " +
+            selected.name +
+            "!";
     }
 
     function startCourse() {
@@ -1008,7 +1086,8 @@
             message.innerHTML =
                 "⚠️ Please choose a theme first! 🎮";
 
-            message.className = "incorrect";
+            message.className =
+                "incorrect";
 
             return;
         }
@@ -1017,7 +1096,8 @@
             message.innerHTML =
                 "⚠️ Please enter your name. 👤";
 
-            message.className = "incorrect";
+            message.className =
+                "incorrect";
 
             return;
         }
@@ -1027,7 +1107,8 @@
             name +
             "! Your adventure begins now! 🚀";
 
-        message.className = "correct";
+        message.className =
+            "correct";
 
         document
             .getElementById("gameArea")
@@ -1210,14 +1291,7 @@
                     "streak"
                 ).innerHTML = streak;
 
-                if (completedLessons === 4) {
-                    document.getElementById(
-                        "celebrationMessage"
-                    ).innerHTML =
-                        "🎉🥳 Amazing work! 🥳🎉";
-
-                    updateBadges();
-                }
+                updateBadges();
             }
         } else {
             feedback.className =
