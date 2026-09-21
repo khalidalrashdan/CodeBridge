@@ -23,7 +23,12 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, var(--background1), var(--background2), var(--background3));
+            background: linear-gradient(
+                135deg,
+                var(--background1),
+                var(--background2),
+                var(--background3)
+            );
             margin: 0;
             padding: 0;
             color: #222;
@@ -32,7 +37,7 @@
 
         .container {
             width: 80%;
-            max-width: 900px;
+            max-width: 950px;
             margin: 40px auto;
             background: var(--card);
             padding: 35px;
@@ -55,54 +60,73 @@
         .welcome {
             text-align: center;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
         }
 
         .theme-title {
-            margin-top: 25px;
             color: var(--primary);
+            margin-top: 25px;
         }
 
         .theme-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 25px 0;
         }
 
         .theme-card {
-            width: 180px;
-            min-height: 130px;
-            padding: 20px;
+            overflow: hidden;
             border: 3px solid #d1d5db;
-            border-radius: 15px;
+            border-radius: 18px;
             cursor: pointer;
             background: white;
             transition: 0.3s;
             text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .theme-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+            transform: translateY(-7px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
 
         .theme-card.selected {
             border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+            transform: translateY(-7px);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+        }
+
+        .theme-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .theme-content {
+            padding: 15px;
         }
 
         .theme-icon {
-            font-size: 42px;
+            font-size: 30px;
         }
 
         .theme-name {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
-            margin-top: 8px;
+            margin-top: 5px;
+        }
+
+        .theme-description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .theme-message {
+            font-weight: bold;
+            color: var(--primary);
         }
 
         .lesson {
@@ -189,12 +213,12 @@
             -webkit-text-fill-color: #9ca3af !important;
         }
 
-        input[type="text"]:focus {
-            border-color: var(--secondary);
-        }
-
         button {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
             color: white;
             border: none;
             padding: 13px 22px;
@@ -219,7 +243,11 @@
         }
 
         .stat {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
             color: white;
             padding: 15px;
             border-radius: 12px;
@@ -257,7 +285,11 @@
         .xp-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, var(--accent), var(--primary));
+            background: linear-gradient(
+                90deg,
+                var(--accent),
+                var(--primary)
+            );
             border-radius: 20px;
             transition: width 0.5s;
         }
@@ -280,7 +312,11 @@
         }
 
         .badge.unlocked {
-            background: linear-gradient(135deg, #fbbf24, #f97316);
+            background: linear-gradient(
+                135deg,
+                #fbbf24,
+                #f97316
+            );
             color: white;
             animation: badgePop 0.5s;
         }
@@ -316,7 +352,11 @@
             text-align: center;
             margin-top: 40px;
             padding: 30px;
-            background: linear-gradient(135deg, var(--background1), var(--background2));
+            background: linear-gradient(
+                135deg,
+                var(--background1),
+                var(--background2)
+            );
             border-radius: 15px;
             border: 2px solid var(--primary);
         }
@@ -349,24 +389,18 @@
             display: none;
         }
 
-        .theme-message {
-            font-weight: bold;
-            margin-top: 10px;
-            color: var(--primary);
-        }
-
         @media (max-width: 700px) {
             .container {
                 width: 95%;
                 padding: 20px;
             }
 
-            .game-panel {
-                grid-template-columns: repeat(2, 1fr);
+            .theme-container {
+                grid-template-columns: 1fr;
             }
 
-            .theme-card {
-                width: 140px;
+            .game-panel {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -379,7 +413,7 @@
     <h1>💻 CODEBRIDGE</h1>
 
     <h2 class="main-title">
-        🚀 Java Fundamentals
+        🚀 Java Fundamentals ☕
     </h2>
 
     <div class="welcome">
@@ -387,8 +421,8 @@
         <h2>👋 Welcome to CodeBridge!</h2>
 
         <p>
-            Learn Java by completing challenges,
-            earning XP, unlocking badges and leveling up!
+            Learn Java through challenges, earn XP ⭐,
+            unlock badges 🏆 and level up! 🚀
         </p>
 
         <h2 class="theme-title">
@@ -396,7 +430,7 @@
         </h2>
 
         <p>
-            Choose a theme before starting your course.
+            Pick your favourite theme before starting! ✨
         </p>
 
         <div class="theme-container">
@@ -406,9 +440,29 @@
                 id="theme-f1"
                 onclick="selectTheme('f1')"
             >
-                <div class="theme-icon">🏎️</div>
-                <div class="theme-name">F1 Racing</div>
-                <p>Race to Java mastery!</p>
+
+                <img
+                    class="theme-image"
+                    src="https://miro.medium.com/v2/resize%3Afit%3A1358/format%3Awebp/0%2A7N38xY1UcvmAeAm7.jpg"
+                    alt="🏎️ F1 racing car"
+                >
+
+                <div class="theme-content">
+
+                    <div class="theme-icon">
+                        🏎️🏁
+                    </div>
+
+                    <div class="theme-name">
+                        F1 Racing
+                    </div>
+
+                    <p class="theme-description">
+                        🏁 Race your way to Java mastery!
+                    </p>
+
+                </div>
+
             </div>
 
             <div
@@ -416,9 +470,29 @@
                 id="theme-football"
                 onclick="selectTheme('football')"
             >
-                <div class="theme-icon">⚽</div>
-                <div class="theme-name">Football</div>
-                <p>Score Java goals!</p>
+
+                <img
+                    class="theme-image"
+                    src="https://www.prazdninyvostrave.cz/storage/QIgHSdzI8zkvOsYSaP7P8OAAXL8jwhcjlUBFAHrJ.png"
+                    alt="⚽ Football stadium"
+                >
+
+                <div class="theme-content">
+
+                    <div class="theme-icon">
+                        ⚽🥅
+                    </div>
+
+                    <div class="theme-name">
+                        Football
+                    </div>
+
+                    <p class="theme-description">
+                        ⚽ Score points and master Java!
+                    </p>
+
+                </div>
+
             </div>
 
             <div
@@ -426,9 +500,29 @@
                 id="theme-disney"
                 onclick="selectTheme('disney')"
             >
-                <div class="theme-icon">🏰</div>
-                <div class="theme-name">Disney Magic</div>
-                <p>Enter the magic!</p>
+
+                <img
+                    class="theme-image"
+                    src="https://theartshouse.org/wp-content/uploads/2025/06/disney-castles.jpg"
+                    alt="🏰 Disney castle"
+                >
+
+                <div class="theme-content">
+
+                    <div class="theme-icon">
+                        🏰✨
+                    </div>
+
+                    <div class="theme-name">
+                        Disney Magic
+                    </div>
+
+                    <p class="theme-description">
+                        ✨ Enter a magical coding adventure!
+                    </p>
+
+                </div>
+
             </div>
 
         </div>
@@ -720,14 +814,14 @@
 
     <div class="complete">
 
-        <div class="complete-icon">🎓</div>
+        <div class="complete-icon">🎓🏆</div>
 
-        <h2>Course Complete!</h2>
+        <h2>Course Complete! 🎉</h2>
 
-        <h3>🎉 Congratulations!</h3>
+        <h3>🥳 Congratulations!</h3>
 
         <p>
-            You completed all 4 Java challenges.
+            You completed all 4 Java challenges! 🚀
         </p>
 
         <p>
@@ -756,11 +850,7 @@
         </p>
 
         <p class="celebration" id="celebrationMessage">
-            🎉🥳 Amazing work! 🥳🎉
-        </p>
-
-        <p>
-            You completed the CodeBridge Java Fundamentals course!
+            🎉🏆🥳 YOU ARE A JAVA MASTER! 🥳🏆🎉
         </p>
 
         <p>
@@ -768,7 +858,7 @@
         </p>
 
         <p>
-            Thank you for using <strong>CodeBridge</strong>! ❤️
+            ❤️ Thank you for using <strong>CodeBridge</strong>!
         </p>
 
     </div>
@@ -825,46 +915,90 @@
             card.classList.remove("selected");
         });
 
-        document.getElementById("theme-" + theme).classList.add("selected");
+        document
+            .getElementById("theme-" + theme)
+            .classList.add("selected");
 
         const selected = themes[theme];
 
-        document.documentElement.style.setProperty("--primary", selected.primary);
-        document.documentElement.style.setProperty("--secondary", selected.secondary);
-        document.documentElement.style.setProperty("--accent", selected.accent);
-        document.documentElement.style.setProperty("--background1", selected.background1);
-        document.documentElement.style.setProperty("--background2", selected.background2);
-        document.documentElement.style.setProperty("--background3", selected.background3);
-        document.documentElement.style.setProperty("--lesson", selected.lesson);
+        document.documentElement.style.setProperty(
+            "--primary",
+            selected.primary
+        );
+
+        document.documentElement.style.setProperty(
+            "--secondary",
+            selected.secondary
+        );
+
+        document.documentElement.style.setProperty(
+            "--accent",
+            selected.accent
+        );
+
+        document.documentElement.style.setProperty(
+            "--background1",
+            selected.background1
+        );
+
+        document.documentElement.style.setProperty(
+            "--background2",
+            selected.background2
+        );
+
+        document.documentElement.style.setProperty(
+            "--background3",
+            selected.background3
+        );
+
+        document.documentElement.style.setProperty(
+            "--lesson",
+            selected.lesson
+        );
 
         document.getElementById("themeMessage").innerHTML =
-            "🎮 Theme selected: " + selected.name + "!";
+            "🎮✨ Theme selected: " + selected.name + "!";
     }
 
     function startCourse() {
-        const name = document.getElementById("studentName").value;
-        const message = document.getElementById("welcomeMessage");
+        const name =
+            document.getElementById("studentName").value;
+
+        const message =
+            document.getElementById("welcomeMessage");
 
         if (selectedTheme === "") {
-            message.innerHTML = "⚠️ Please choose a theme first.";
+            message.innerHTML =
+                "⚠️ Please choose a theme first! 🎮";
+
             message.className = "incorrect";
+
             return;
         }
 
         if (name.trim() === "") {
-            message.innerHTML = "⚠️ Please enter your name.";
+            message.innerHTML =
+                "⚠️ Please enter your name. 👤";
+
             message.className = "incorrect";
+
             return;
         }
 
         message.innerHTML =
-            "🎉 Welcome, " + name + "! Your adventure begins now! 🚀";
+            "🎉 Welcome, " +
+            name +
+            "! Your adventure begins now! 🚀";
 
         message.className = "correct";
 
-        document.getElementById("gameArea").classList.remove("hidden");
+        document
+            .getElementById("gameArea")
+            .classList.remove("hidden");
 
-        document.getElementById("finalName").innerHTML = name;
+        document.getElementById("finalName").innerHTML =
+            name;
+
         document.getElementById("finalTheme").innerHTML =
             themes[selectedTheme].name;
 
@@ -881,51 +1015,73 @@
     function addXP(amount) {
         xp += amount;
 
-        level = Math.floor(xp / 100) + 1;
+        level =
+            Math.floor(xp / 100) + 1;
 
-        document.getElementById("xp").innerHTML = xp;
-        document.getElementById("level").innerHTML = level;
+        document.getElementById("xp").innerHTML =
+            xp;
 
-        const currentLevelXP = xp % 100;
+        document.getElementById("level").innerHTML =
+            level;
+
+        const currentLevelXP =
+            xp % 100;
 
         document.getElementById("xpFill").style.width =
             currentLevelXP + "%";
 
         document.getElementById("xpText").innerHTML =
-            currentLevelXP + " / 100 XP to next level";
+            currentLevelXP +
+            " / 100 XP to next level";
 
-        document.getElementById("finalXP").innerHTML = xp;
-        document.getElementById("finalLevel").innerHTML = level;
+        document.getElementById("finalXP").innerHTML =
+            xp;
+
+        document.getElementById("finalLevel").innerHTML =
+            level;
 
         updateBadges();
     }
 
     function updateBadges() {
         if (xp >= 10) {
-            document.getElementById("badge1").classList.add("unlocked");
+            document
+                .getElementById("badge1")
+                .classList.add("unlocked");
         }
 
         if (score >= 1) {
-            document.getElementById("badge2").classList.add("unlocked");
+            document
+                .getElementById("badge2")
+                .classList.add("unlocked");
         }
 
         if (streak >= 3) {
-            document.getElementById("badge3").classList.add("unlocked");
+            document
+                .getElementById("badge3")
+                .classList.add("unlocked");
         }
 
         if (completedLessons === 4) {
-            document.getElementById("badge4").classList.add("unlocked");
+            document
+                .getElementById("badge4")
+                .classList.add("unlocked");
         }
     }
 
     function checkAnswer(questionNumber) {
         const answer =
-            document.getElementById("answer" + questionNumber).value;
+            document.getElementById(
+                "answer" + questionNumber
+            ).value;
 
         const feedback =
-            document.getElementById("feedback" + questionNumber);
+            document.getElementById(
+                "feedback" + questionNumber
+            );
 
-        const code = cleanCode(answer);
+        const code =
+            cleanCode(answer);
 
         let isCorrect = false;
 
@@ -935,8 +1091,9 @@
                 code === "intage=15"
             ) {
                 isCorrect = true;
+
                 feedback.innerHTML =
-                    "🎉 Correct! +25 XP! Great job!";
+                    "🎉 Correct! ⭐ +25 XP!";
             } else {
                 feedback.innerHTML =
                     "❌ Not quite. Try: int age = 15;";
@@ -949,8 +1106,9 @@
                 code.includes("\"")
             ) {
                 isCorrect = true;
+
                 feedback.innerHTML =
-                    "🎉 Correct! +25 XP! You created a String variable.";
+                    "🎉 Correct! ⭐ +25 XP!";
             } else {
                 feedback.innerHTML =
                     '❌ Not quite. Try: String name = "YourName";';
@@ -960,11 +1118,14 @@
         if (questionNumber === 3) {
             if (
                 code.includes("if(age>=18)") &&
-                code.includes("system.out.println(\"adult\")")
+                code.includes(
+                    "system.out.println(\"adult\")"
+                )
             ) {
                 isCorrect = true;
+
                 feedback.innerHTML =
-                    "🎉 Correct! +25 XP! Your if statement works perfectly.";
+                    "🎉 Correct! ⭐ +25 XP!";
             } else {
                 feedback.innerHTML =
                     '❌ Check the condition age >= 18 and print "Adult".';
@@ -973,12 +1134,17 @@
 
         if (questionNumber === 4) {
             if (
-                code.includes("for(inti=0;i<5;i++)") &&
-                code.includes("system.out.println(i)")
+                code.includes(
+                    "for(inti=0;i<5;i++)"
+                ) &&
+                code.includes(
+                    "system.out.println(i)"
+                )
             ) {
                 isCorrect = true;
+
                 feedback.innerHTML =
-                    "🎉 Correct! +25 XP! Your loop works perfectly.";
+                    "🎉 Correct! ⭐ +25 XP!";
             } else {
                 feedback.innerHTML =
                     "❌ Check that the loop starts at 0, uses i < 5, increases i by 1, and prints i.";
@@ -986,7 +1152,8 @@
         }
 
         if (isCorrect) {
-            feedback.className = "feedback correct";
+            feedback.className =
+                "feedback correct";
 
             if (!feedback.dataset.completed) {
                 completedLessons++;
@@ -995,25 +1162,40 @@
 
                 addXP(25);
 
-                feedback.dataset.completed = "true";
+                feedback.dataset.completed =
+                    "true";
 
-                document.getElementById("score").innerHTML = score;
-                document.getElementById("streak").innerHTML = streak;
+                document.getElementById(
+                    "score"
+                ).innerHTML = score;
+
+                document.getElementById(
+                    "streak"
+                ).innerHTML = streak;
 
                 if (completedLessons === 4) {
-                    document.getElementById("celebrationMessage").innerHTML =
+                    document.getElementById(
+                        "celebrationMessage"
+                    ).innerHTML =
                         "🎉🏆🥳 YOU ARE A JAVA MASTER! 🥳🏆🎉";
 
                     updateBadges();
                 }
             }
         } else {
-            feedback.className = "feedback incorrect";
+            feedback.className =
+                "feedback incorrect";
+
             streak = 0;
-            document.getElementById("streak").innerHTML = streak;
+
+            document.getElementById(
+                "streak"
+            ).innerHTML = streak;
         }
 
-        document.getElementById("finalScore").innerHTML =
+        document.getElementById(
+            "finalScore"
+        ).innerHTML =
             score + " / 4";
     }
 </script>
