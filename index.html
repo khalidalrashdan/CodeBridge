@@ -69,14 +69,14 @@
             border: 2px solid #374151;
         }
 
-        /* BLACK TEXT BOXES */
+        /* BLACK TEXT BOXES WITH WHITE TEXT */
         textarea {
             width: 100%;
             min-height: 130px;
             padding: 15px;
             margin-top: 10px;
             background-color: #000000;
-            color: #00ff88;
+            color: white;
             border: 2px solid #2563eb;
             border-radius: 10px;
             font-family: "Courier New", monospace;
@@ -84,6 +84,7 @@
             box-sizing: border-box;
             resize: vertical;
             outline: none;
+            caret-color: white;
         }
 
         textarea::placeholder {
@@ -93,19 +94,29 @@
         textarea:focus {
             border-color: #22c55e;
             box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+            color: white;
         }
 
+        /* NAME INPUT WITH WHITE TEXT */
         input {
             padding: 12px;
             width: 260px;
+            background-color: #000000;
+            color: white;
             border: 2px solid #93c5fd;
             border-radius: 8px;
             font-size: 16px;
             outline: none;
+            caret-color: white;
+        }
+
+        input::placeholder {
+            color: #9ca3af;
         }
 
         input:focus {
             border-color: #2563eb;
+            color: white;
         }
 
         button {
@@ -460,7 +471,6 @@
 
 </div>
 
-
 <script>
 
     let completedLessons = 0;
@@ -493,7 +503,6 @@
         }
     }
 
-
     function cleanCode(code) {
 
         return code
@@ -502,7 +511,6 @@
             .trim();
 
     }
-
 
     function checkAnswer(questionNumber) {
 
@@ -519,7 +527,6 @@
         let code = cleanCode(answer);
 
         let isCorrect = false;
-
 
         /* Lesson 1 */
 
@@ -543,7 +550,6 @@
             }
         }
 
-
         /* Lesson 2 */
 
         if (questionNumber === 2) {
@@ -565,7 +571,6 @@
 
             }
         }
-
 
         /* Lesson 3 */
 
@@ -589,7 +594,6 @@
             }
         }
 
-
         /* Lesson 4 */
 
         if (questionNumber === 4) {
@@ -611,7 +615,6 @@
 
             }
         }
-
 
         /* Update score */
 
