@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f7fb;
+            background: linear-gradient(135deg, #dbeafe, #eef2ff, #f0fdf4);
             margin: 0;
             padding: 0;
             color: #222;
@@ -19,17 +19,39 @@
             max-width: 900px;
             margin: 40px auto;
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
             color: #2563eb;
             text-align: center;
+            font-size: 42px;
+            margin-bottom: 5px;
         }
 
-        h2 {
+        .main-title {
+            text-align: center;
+            color: #1e3a8a;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 20px;
+            background: #eff6ff;
+            border-radius: 15px;
+        }
+
+        .lesson {
+            margin-top: 30px;
+            padding: 25px;
+            border-left: 6px solid #2563eb;
+            background-color: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .lesson h2 {
             color: #1d4ed8;
         }
 
@@ -37,63 +59,75 @@
             color: #333;
         }
 
-        .welcome {
-            text-align: center;
-        }
-
-        .lesson {
-            margin-top: 30px;
-            padding: 25px;
-            border-left: 5px solid #2563eb;
-            background-color: #f8fafc;
-        }
-
         pre {
-            background-color: #1e293b;
-            color: #f8fafc;
-            padding: 15px;
-            border-radius: 8px;
+            background-color: #111827;
+            color: #00ff88;
+            padding: 18px;
+            border-radius: 10px;
             overflow-x: auto;
+            font-size: 15px;
+            border: 2px solid #374151;
         }
 
+        /* BLACK TEXT BOXES */
         textarea {
             width: 100%;
-            min-height: 120px;
-            padding: 12px;
+            min-height: 130px;
+            padding: 15px;
             margin-top: 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 15px;
+            background-color: #000000;
+            color: #00ff88;
+            border: 2px solid #2563eb;
+            border-radius: 10px;
+            font-family: "Courier New", monospace;
+            font-size: 16px;
             box-sizing: border-box;
             resize: vertical;
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        textarea:focus {
+            border-color: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
         }
 
         input {
-            padding: 10px;
-            width: 250px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            padding: 12px;
+            width: 260px;
+            border: 2px solid #93c5fd;
+            border-radius: 8px;
             font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
         }
 
         button {
-            background-color: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 13px 22px;
             margin-top: 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
         button:hover {
-            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(37, 99, 235, 0.3);
         }
 
         .feedback {
-            margin-top: 10px;
+            margin-top: 12px;
             font-weight: bold;
         }
 
@@ -109,14 +143,27 @@
             text-align: center;
             margin-top: 40px;
             padding: 30px;
-            background-color: #eff6ff;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            border-radius: 15px;
+            border: 2px solid #93c5fd;
+        }
+
+        .emoji-title {
+            font-size: 28px;
         }
 
         hr {
-            margin: 35px 0;
+            margin: 40px 0;
             border: none;
-            border-top: 1px solid #ddd;
+            border-top: 2px dashed #cbd5e1;
+        }
+
+        ul {
+            line-height: 1.8;
+        }
+
+        strong {
+            color: #1e40af;
         }
     </style>
 </head>
@@ -125,18 +172,27 @@
 
 <div class="container">
 
-    <h1>CODEBRIDGE</h1>
-    <h2 style="text-align: center;">Java Fundamentals</h2>
+    <h1>💻 CODEBRIDGE</h1>
+
+    <h2 class="main-title">
+        🚀 Java Fundamentals
+    </h2>
 
     <div class="welcome">
 
+        <h2>👋 Welcome to CodeBridge!</h2>
+
         <p>
-            Welcome to CodeBridge!<br>
-            Learn the fundamentals of Java through four simple lessons.
+            Learn the fundamentals of Java through
+            <strong>four simple lessons</strong>. ☕💻
+        </p>
+
+        <p>
+            🧠 Learn • 💻 Code • 🏆 Complete
         </p>
 
         <label for="studentName">
-            <strong>Enter your name:</strong>
+            <strong>👤 Enter your name:</strong>
         </label>
 
         <br><br>
@@ -150,7 +206,7 @@
         <br><br>
 
         <button onclick="startCourse()">
-            Start Course
+            🚀 Start Course
         </button>
 
         <p id="welcomeMessage"></p>
@@ -159,34 +215,33 @@
 
     <hr>
 
-
     <!-- LESSON 1 -->
 
     <div class="lesson">
 
-        <h2>Lesson 1: Variables</h2>
+        <h2>📦 Lesson 1: Variables</h2>
 
         <p>
             A variable is used to store information.
         </p>
 
-        <p><strong>Example:</strong></p>
+        <p>💡 <strong>Example:</strong></p>
 
-        <pre>
-int age = 15;</pre>
+        <pre>int age = 15;</pre>
 
         <p>
-            Here, <strong>age</strong> stores the number <strong>15</strong>.
+            Here, <strong>age</strong> stores the number
+            <strong>15</strong>.
         </p>
 
-        <h3>Question</h3>
+        <h3>✏️ Question</h3>
 
         <p>
             Write a Java statement that creates an integer variable called
             <strong>age</strong> and assigns it the value <strong>15</strong>.
         </p>
 
-        <p><strong>Your answer:</strong></p>
+        <p><strong>💻 Your answer:</strong></p>
 
         <textarea
             id="answer1"
@@ -197,44 +252,33 @@ int age = 15;</pre>
         <br>
 
         <button onclick="checkAnswer(1)">
-            Submit Answer
+            ✅ Submit Answer
         </button>
 
         <p id="feedback1" class="feedback"></p>
 
     </div>
 
-
     <hr>
-
 
     <!-- LESSON 2 -->
 
     <div class="lesson">
 
-        <h2>Lesson 2: Data Types</h2>
+        <h2>🔤 Lesson 2: Data Types</h2>
 
         <p>
             Java has different data types.
         </p>
 
-        <p>
-            <strong>String</strong> stores text.
-        </p>
+        <ul>
+            <li>🔤 <strong>String</strong> stores text.</li>
+            <li>🔢 <strong>int</strong> stores whole numbers.</li>
+            <li>🔣 <strong>double</strong> stores decimal numbers.</li>
+            <li>✅ <strong>boolean</strong> stores true or false.</li>
+        </ul>
 
-        <p>
-            <strong>int</strong> stores whole numbers.
-        </p>
-
-        <p>
-            <strong>double</strong> stores decimal numbers.
-        </p>
-
-        <p>
-            <strong>boolean</strong> stores true or false.
-        </p>
-
-        <h3>Question</h3>
+        <h3>✏️ Question</h3>
 
         <p>
             Write a Java statement that creates a
@@ -247,7 +291,7 @@ int age = 15;</pre>
             <strong>"Alex"</strong>.
         </p>
 
-        <p><strong>Your answer:</strong></p>
+        <p><strong>💻 Your answer:</strong></p>
 
         <textarea
             id="answer2"
@@ -258,35 +302,32 @@ int age = 15;</pre>
         <br>
 
         <button onclick="checkAnswer(2)">
-            Submit Answer
+            ✅ Submit Answer
         </button>
 
         <p id="feedback2" class="feedback"></p>
 
     </div>
 
-
     <hr>
-
 
     <!-- LESSON 3 -->
 
     <div class="lesson">
 
-        <h2>Lesson 3: If Statements</h2>
+        <h2>🤔 Lesson 3: If Statements</h2>
 
         <p>
             An if statement allows a program to make decisions.
         </p>
 
-        <p><strong>Example:</strong></p>
+        <p>💡 <strong>Example:</strong></p>
 
-        <pre>
-if (age >= 18) {
+        <pre>if (age >= 18) {
     System.out.println("Adult");
 }</pre>
 
-        <h3>Question</h3>
+        <h3>✏️ Question</h3>
 
         <p>
             Write a Java <strong>if statement</strong> that checks whether
@@ -298,10 +339,9 @@ if (age >= 18) {
             If the condition is true, the program should print:
         </p>
 
-        <pre>
-Adult</pre>
+        <pre>Adult</pre>
 
-        <p><strong>Your answer:</strong></p>
+        <p><strong>💻 Your answer:</strong></p>
 
         <textarea
             id="answer3"
@@ -312,35 +352,32 @@ Adult</pre>
         <br>
 
         <button onclick="checkAnswer(3)">
-            Submit Answer
+            ✅ Submit Answer
         </button>
 
         <p id="feedback3" class="feedback"></p>
 
     </div>
 
-
     <hr>
-
 
     <!-- LESSON 4 -->
 
     <div class="lesson">
 
-        <h2>Lesson 4: Loops</h2>
+        <h2>🔄 Lesson 4: Loops</h2>
 
         <p>
             A loop repeats code multiple times.
         </p>
 
-        <p><strong>Example:</strong></p>
+        <p>💡 <strong>Example:</strong></p>
 
-        <pre>
-for (int i = 0; i < 5; i++) {
+        <pre>for (int i = 0; i < 5; i++) {
     System.out.println(i);
 }</pre>
 
-        <h3>Question</h3>
+        <h3>✏️ Question</h3>
 
         <p>
             Write a Java <strong>for loop</strong> that runs 5 times.
@@ -355,7 +392,7 @@ for (int i = 0; i < 5; i++) {
             Inside the loop, print the value of <strong>i</strong>.
         </p>
 
-        <p><strong>Your answer:</strong></p>
+        <p><strong>💻 Your answer:</strong></p>
 
         <textarea
             id="answer4"
@@ -366,55 +403,57 @@ for (int i = 0; i < 5; i++) {
         <br>
 
         <button onclick="checkAnswer(4)">
-            Submit Answer
+            ✅ Submit Answer
         </button>
 
         <p id="feedback4" class="feedback"></p>
 
     </div>
 
-
     <hr>
-
 
     <!-- COURSE COMPLETE -->
 
     <div class="complete">
 
-        <h2>Course Complete!</h2>
+        <h2>🎓 Course Complete!</h2>
 
-        <h3>Congratulations!</h3>
+        <h3>🎉 Congratulations!</h3>
 
         <p>
             You completed all 4 lessons.
         </p>
 
         <p>
-            <strong>Course:</strong> Java Fundamentals
+            📚 <strong>Course:</strong> Java Fundamentals
         </p>
 
         <p>
-            <strong>Progress:</strong>
+            📈 <strong>Progress:</strong>
             <span id="progress">
                 0 / 4 lessons completed
             </span>
         </p>
 
         <p>
-            <strong>Score:</strong>
+            🏆 <strong>Score:</strong>
             <span id="score">
                 0 / 4
             </span>
         </p>
 
-        <h2>🎉 Congratulations!</h2>
+        <h2>🎉🥳 Congratulations! 🥳🎉</h2>
 
         <p>
-            You completed the CodeBridge Java Fundamentals course.
+            You completed the CodeBridge Java Fundamentals course!
         </p>
 
         <p>
-            Thank you for using CodeBridge!
+            ☕💻 Keep coding and keep learning! 🚀
+        </p>
+
+        <p>
+            Thank you for using <strong>CodeBridge</strong>! ❤️
         </p>
 
     </div>
@@ -427,7 +466,6 @@ for (int i = 0; i < 5; i++) {
     let completedLessons = 0;
     let score = 0;
 
-
     function startCourse() {
 
         let name =
@@ -439,7 +477,7 @@ for (int i = 0; i < 5; i++) {
         if (name.trim() === "") {
 
             message.innerHTML =
-                "Please enter your name.";
+                "⚠️ Please enter your name.";
 
             message.className =
                 "incorrect";
@@ -447,14 +485,12 @@ for (int i = 0; i < 5; i++) {
         } else {
 
             message.innerHTML =
-                "Welcome, " + name +
-                "! Good luck with the course.";
+                "🎉 Welcome, " + name +
+                "! Good luck with the course! 🚀";
 
             message.className =
                 "correct";
-
         }
-
     }
 
 
@@ -497,15 +533,14 @@ for (int i = 0; i < 5; i++) {
                 isCorrect = true;
 
                 feedback.innerHTML =
-                    "Correct! You created an integer variable called age with the value 15.";
+                    "🎉 Correct! Great job! You created the age variable correctly.";
 
             } else {
 
                 feedback.innerHTML =
-                    "Not quite. Make sure you use: int age = 15;";
+                    "❌ Not quite. Try: int age = 15;";
 
             }
-
         }
 
 
@@ -521,15 +556,14 @@ for (int i = 0; i < 5; i++) {
                 isCorrect = true;
 
                 feedback.innerHTML =
-                    "Correct! You created a String variable called name.";
+                    "🎉 Correct! You created a String variable called name.";
 
             } else {
 
                 feedback.innerHTML =
-                    'Not quite. Make sure you use String name = "YourName";';
+                    '❌ Not quite. Try: String name = "YourName";';
 
             }
-
         }
 
 
@@ -539,23 +573,20 @@ for (int i = 0; i < 5; i++) {
 
             if (
                 code.includes("if(age>=18)") &&
-                code.includes(
-                    "system.out.println(\"adult\")"
-                )
+                code.includes("system.out.println(\"adult\")")
             ) {
 
                 isCorrect = true;
 
                 feedback.innerHTML =
-                    "Correct! Your if statement checks whether age is at least 18.";
+                    "🎉 Correct! Your if statement works perfectly.";
 
             } else {
 
                 feedback.innerHTML =
-                    'Not quite. Check the condition age >= 18 and print "Adult".';
+                    '❌ Check the condition age >= 18 and print "Adult".';
 
             }
-
         }
 
 
@@ -564,26 +595,21 @@ for (int i = 0; i < 5; i++) {
         if (questionNumber === 4) {
 
             if (
-                code.includes(
-                    "for(inti=0;i<5;i++)"
-                ) &&
-                code.includes(
-                    "system.out.println(i)"
-                )
+                code.includes("for(inti=0;i<5;i++)") &&
+                code.includes("system.out.println(i)")
             ) {
 
                 isCorrect = true;
 
                 feedback.innerHTML =
-                    "Correct! Your for loop runs 5 times and prints i.";
+                    "🎉 Correct! Your loop runs 5 times and prints i.";
 
             } else {
 
                 feedback.innerHTML =
-                    "Not quite. Start i at 0, use i < 5, increase i by 1, and print i.";
+                    "❌ Check that the loop starts at 0, uses i < 5, increases i by 1, and prints i.";
 
             }
-
         }
 
 
