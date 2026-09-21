@@ -60,7 +60,7 @@
         .welcome {
             text-align: center;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 15px;
         }
 
@@ -100,7 +100,7 @@
 
         .theme-image {
             width: 100%;
-            height: 150px;
+            height: 170px;
             object-fit: cover;
             display: block;
         }
@@ -354,15 +354,12 @@
             padding: 30px;
             border-radius: 15px;
             border: 2px solid var(--primary);
+            background: linear-gradient(
+                135deg,
+                var(--background1),
+                var(--background2)
+            );
             color: #222;
-        }
-
-        .complete h2,
-        .complete h3,
-        .complete p,
-        .complete strong,
-        .complete span {
-            color: inherit;
         }
 
         .complete-icon {
@@ -381,11 +378,8 @@
                 #111111,
                 #1f2937
             ) !important;
-
             border: 3px solid #e10600 !important;
-
             color: #ffffff !important;
-
             box-shadow:
                 0 0 25px rgba(225, 6, 0, 0.35),
                 inset 0 0 30px rgba(255, 255, 255, 0.03);
@@ -403,10 +397,6 @@
         .f1-complete .celebration {
             color: #ffcc00 !important;
             -webkit-text-fill-color: #ffcc00 !important;
-        }
-
-        .f1-complete .complete-icon {
-            color: #ffffff !important;
         }
 
         hr {
@@ -481,8 +471,8 @@
 
                 <img
                     class="theme-image"
-                    src="https://miro.medium.com/v2/resize%3Afit%3A1358/format%3Awebp/0%2A7N38xY1UcvmAeAm7.jpg"
-                    alt="F1 Racing"
+                    src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80"
+                    alt="🏎️ F1 Racing"
                 >
 
                 <div class="theme-content">
@@ -511,8 +501,8 @@
 
                 <img
                     class="theme-image"
-                    src="https://www.prazdninyvostrave.cz/storage/QIgHSdzI8zkvOsYSaP7P8OAAXL8jwhcjlUBFAHrJ.png"
-                    alt="Football"
+                    src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=80"
+                    alt="⚽ Football"
                 >
 
                 <div class="theme-content">
@@ -541,14 +531,15 @@
 
                 <img
                     class="theme-image"
-                    src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Cinderella_Castle%2C_Magic_Kingdom_%282026%29_%28square_crop%29.jpg"
-                    alt="Disney Cinderella Castle"
+                    src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Mickey_Mouse_and_Minnie_Mouse.jpg"
+                    alt="🐭 Mickey and Minnie Mouse"
+                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1608889825103-eb5ed706fc64?auto=format&fit=crop&w=900&q=80';"
                 >
 
                 <div class="theme-content">
 
                     <div class="theme-icon">
-                        🏰✨
+                        🐭❤️
                     </div>
 
                     <div class="theme-name">
@@ -914,6 +905,7 @@
 </div>
 
 <script>
+
     let completedLessons = 0;
     let score = 0;
     let xp = 0;
@@ -922,6 +914,7 @@
     let selectedTheme = "";
 
     const themes = {
+
         f1: {
             name: "F1 Racing",
             primary: "#e10600",
@@ -954,14 +947,18 @@
             background3: "#fef3c7",
             lesson: "#faf5ff"
         }
+
     };
 
     function selectTheme(theme) {
+
         selectedTheme = theme;
 
-        document.querySelectorAll(".theme-card").forEach(card => {
-            card.classList.remove("selected");
-        });
+        document
+            .querySelectorAll(".theme-card")
+            .forEach(card => {
+                card.classList.remove("selected");
+            });
 
         document
             .getElementById("theme-" + theme)
@@ -1008,98 +1005,24 @@
             document.getElementById("courseComplete");
 
         if (theme === "f1") {
+
             complete.classList.add("f1-complete");
 
-            complete.style.setProperty(
-                "background",
-                "linear-gradient(135deg, #050505, #111111, #1f2937)",
-                "important"
-            );
-
-            complete.style.setProperty(
-                "color",
-                "#ffffff",
-                "important"
-            );
-
-            complete
-                .querySelectorAll("h2, h3, p, strong, span")
-                .forEach(element => {
-                    element.style.setProperty(
-                        "color",
-                        "#ffffff",
-                        "important"
-                    );
-
-                    element.style.setProperty(
-                        "-webkit-text-fill-color",
-                        "#ffffff",
-                        "important"
-                    );
-                });
-
-            document
-                .getElementById("celebrationMessage")
-                .style.setProperty(
-                    "color",
-                    "#ffcc00",
-                    "important"
-                );
-
-            document
-                .getElementById("celebrationMessage")
-                .style.setProperty(
-                    "-webkit-text-fill-color",
-                    "#ffcc00",
-                    "important"
-                );
-
         } else {
+
             complete.classList.remove("f1-complete");
 
-            complete.style.setProperty(
-                "background",
-                "linear-gradient(135deg, " +
-                selected.background1 +
-                ", " +
-                selected.background2 +
-                ")",
-                "important"
-            );
-
-            complete.style.setProperty(
-                "color",
-                "#222222",
-                "important"
-            );
-
-            complete
-                .querySelectorAll("h2, h3, p, strong, span")
-                .forEach(element => {
-                    element.style.removeProperty("color");
-                    element.style.removeProperty(
-                        "-webkit-text-fill-color"
-                    );
-                });
-
-            document
-                .getElementById("celebrationMessage")
-                .style.removeProperty("color");
-
-            document
-                .getElementById("celebrationMessage")
-                .style.removeProperty(
-                    "-webkit-text-fill-color"
-                );
         }
 
         document.getElementById("themeMessage").innerHTML =
             "🎮✨ Theme selected: " +
             selected.name +
             "!";
+
     }
 
     function startCourse() {
+
         const name =
             document.getElementById("studentName").value;
 
@@ -1107,6 +1030,7 @@
             document.getElementById("welcomeMessage");
 
         if (selectedTheme === "") {
+
             message.innerHTML =
                 "⚠️ Please choose a theme first! 🎮";
 
@@ -1117,6 +1041,7 @@
         }
 
         if (name.trim() === "") {
+
             message.innerHTML =
                 "⚠️ Please enter your name. 👤";
 
@@ -1145,16 +1070,20 @@
             themes[selectedTheme].name;
 
         addXP(10);
+
     }
 
     function cleanCode(code) {
+
         return code
             .toLowerCase()
             .replace(/\s+/g, "")
             .trim();
+
     }
 
     function addXP(amount) {
+
         xp += amount;
 
         level =
@@ -1183,35 +1112,47 @@
             level;
 
         updateBadges();
+
     }
 
     function updateBadges() {
+
         if (xp >= 10) {
+
             document
                 .getElementById("badge1")
                 .classList.add("unlocked");
+
         }
 
         if (score >= 1) {
+
             document
                 .getElementById("badge2")
                 .classList.add("unlocked");
+
         }
 
         if (streak >= 3) {
+
             document
                 .getElementById("badge3")
                 .classList.add("unlocked");
+
         }
 
         if (completedLessons === 4) {
+
             document
                 .getElementById("badge4")
                 .classList.add("unlocked");
+
         }
+
     }
 
     function checkAnswer(questionNumber) {
+
         const answer =
             document.getElementById(
                 "answer" + questionNumber
@@ -1228,53 +1169,72 @@
         let isCorrect = false;
 
         if (questionNumber === 1) {
+
             if (
                 code === "intage=15;" ||
                 code === "intage=15"
             ) {
+
                 isCorrect = true;
 
                 feedback.innerHTML =
                     "🎉 Correct! ⭐ +25 XP!";
+
             } else {
+
                 feedback.innerHTML =
                     "❌ Not quite. Try: int age = 15;";
+
             }
+
         }
 
         if (questionNumber === 2) {
+
             if (
                 code.includes("stringname=") &&
                 code.includes("\"")
             ) {
+
                 isCorrect = true;
 
                 feedback.innerHTML =
                     "🎉 Correct! ⭐ +25 XP!";
+
             } else {
+
                 feedback.innerHTML =
                     '❌ Not quite. Try: String name = "YourName";';
+
             }
+
         }
 
         if (questionNumber === 3) {
+
             if (
                 code.includes("if(age>=18)") &&
                 code.includes(
                     "system.out.println(\"adult\")"
                 )
             ) {
+
                 isCorrect = true;
 
                 feedback.innerHTML =
                     "🎉 Correct! ⭐ +25 XP!";
+
             } else {
+
                 feedback.innerHTML =
                     '❌ Check the condition age >= 18 and print "Adult".';
+
             }
+
         }
 
         if (questionNumber === 4) {
+
             if (
                 code.includes(
                     "for(inti=0;i<5;i++)"
@@ -1283,21 +1243,28 @@
                     "system.out.println(i)"
                 )
             ) {
+
                 isCorrect = true;
 
                 feedback.innerHTML =
                     "🎉 Correct! ⭐ +25 XP!";
+
             } else {
+
                 feedback.innerHTML =
                     "❌ Check that the loop starts at 0, uses i < 5, increases i by 1, and prints i.";
+
             }
+
         }
 
         if (isCorrect) {
+
             feedback.className =
                 "feedback correct";
 
             if (!feedback.dataset.completed) {
+
                 completedLessons++;
                 score++;
                 streak++;
@@ -1309,15 +1276,20 @@
 
                 document.getElementById(
                     "score"
-                ).innerHTML = score;
+                ).innerHTML =
+                    score;
 
                 document.getElementById(
                     "streak"
-                ).innerHTML = streak;
+                ).innerHTML =
+                    streak;
 
                 updateBadges();
+
             }
+
         } else {
+
             feedback.className =
                 "feedback incorrect";
 
@@ -1325,14 +1297,18 @@
 
             document.getElementById(
                 "streak"
-            ).innerHTML = streak;
+            ).innerHTML =
+                streak;
+
         }
 
         document.getElementById(
             "finalScore"
         ).innerHTML =
             score + " / 4";
+
     }
+
 </script>
 
 </body>
