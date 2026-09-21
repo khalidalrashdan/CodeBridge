@@ -60,7 +60,7 @@
         .welcome {
             text-align: center;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
         }
 
@@ -399,6 +399,32 @@
             -webkit-text-fill-color: #ffcc00 !important;
         }
 
+        .roblox-complete {
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #1e1b4b,
+                #312e81
+            ) !important;
+            border: 3px solid #8b5cf6 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .roblox-complete h2,
+        .roblox-complete h3,
+        .roblox-complete p,
+        .roblox-complete strong,
+        .roblox-complete span {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .roblox-complete .celebration {
+            color: #facc15 !important;
+            -webkit-text-fill-color: #facc15 !important;
+        }
+
         hr {
             margin: 40px 0;
             border: none;
@@ -525,29 +551,28 @@
 
             <div
                 class="theme-card"
-                id="theme-disney"
-                onclick="selectTheme('disney')"
+                id="theme-roblox"
+                onclick="selectTheme('roblox')"
             >
 
                 <img
                     class="theme-image"
-                    src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Mickey_Mouse_and_Minnie_Mouse.jpg"
-                    alt="🐭 Mickey and Minnie Mouse"
-                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1608889825103-eb5ed706fc64?auto=format&fit=crop&w=900&q=80';"
+                    src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=900&q=80"
+                    alt="🎮 Roblox Gaming"
                 >
 
                 <div class="theme-content">
 
                     <div class="theme-icon">
-                        🐭❤️
+                        🎮🧱
                     </div>
 
                     <div class="theme-name">
-                        Disney Magic
+                        Roblox
                     </div>
 
                     <p class="theme-description">
-                        ✨ Enter a magical coding adventure!
+                        🎮 Build, code and level up!
                     </p>
 
                 </div>
@@ -884,7 +909,7 @@
             <span id="finalLevel">1</span>
         </p>
 
-        <p class="celebration" id="celebrationMessage">
+        <p class="celebration">
             🎉🥳 Amazing work! 🥳🎉
         </p>
 
@@ -937,15 +962,15 @@
             lesson: "#f0fdf4"
         },
 
-        disney: {
-            name: "Disney Magic",
-            primary: "#7c3aed",
+        roblox: {
+            name: "Roblox",
+            primary: "#8b5cf6",
             secondary: "#ec4899",
             accent: "#facc15",
             background1: "#ede9fe",
             background2: "#fce7f3",
-            background3: "#fef3c7",
-            lesson: "#faf5ff"
+            background3: "#dbeafe",
+            lesson: "#f5f3ff"
         }
 
     };
@@ -1004,14 +1029,17 @@
         const complete =
             document.getElementById("courseComplete");
 
+        complete.classList.remove(
+            "f1-complete",
+            "roblox-complete"
+        );
+
         if (theme === "f1") {
-
             complete.classList.add("f1-complete");
+        }
 
-        } else {
-
-            complete.classList.remove("f1-complete");
-
+        if (theme === "roblox") {
+            complete.classList.add("roblox-complete");
         }
 
         document.getElementById("themeMessage").innerHTML =
@@ -1069,7 +1097,9 @@
         document.getElementById("finalTheme").innerHTML =
             themes[selectedTheme].name;
 
-        addXP(10);
+        if (xp === 0) {
+            addXP(10);
+        }
 
     }
 
@@ -1284,6 +1314,11 @@
                 ).innerHTML =
                     streak;
 
+                document.getElementById(
+                    "finalScore"
+                ).innerHTML =
+                    score + " / 4";
+
                 updateBadges();
 
             }
@@ -1301,11 +1336,6 @@
                 streak;
 
         }
-
-        document.getElementById(
-            "finalScore"
-        ).innerHTML =
-            score + " / 4";
 
     }
 
