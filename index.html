@@ -478,6 +478,7 @@
                 id="theme-f1"
                 onclick="selectTheme('f1')"
             >
+
                 <img
                     class="theme-image"
                     src="https://miro.medium.com/v2/resize%3Afit%3A1358/format%3Awebp/0%2A7N38xY1UcvmAeAm7.jpg"
@@ -485,6 +486,7 @@
                 >
 
                 <div class="theme-content">
+
                     <div class="theme-icon">
                         🏎️🏁
                     </div>
@@ -496,7 +498,9 @@
                     <p class="theme-description">
                         🏁 Race your way to Java mastery!
                     </p>
+
                 </div>
+
             </div>
 
             <div
@@ -504,6 +508,7 @@
                 id="theme-football"
                 onclick="selectTheme('football')"
             >
+
                 <img
                     class="theme-image"
                     src="https://www.prazdninyvostrave.cz/storage/QIgHSdzI8zkvOsYSaP7P8OAAXL8jwhcjlUBFAHrJ.png"
@@ -511,6 +516,7 @@
                 >
 
                 <div class="theme-content">
+
                     <div class="theme-icon">
                         ⚽🥅
                     </div>
@@ -522,7 +528,9 @@
                     <p class="theme-description">
                         ⚽ Score points and master Java!
                     </p>
+
                 </div>
+
             </div>
 
             <div
@@ -530,13 +538,15 @@
                 id="theme-disney"
                 onclick="selectTheme('disney')"
             >
+
                 <img
                     class="theme-image"
-                    src="https://theartshouse.org/wp-content/uploads/2025/06/disney-castles.jpg"
-                    alt="Disney"
+                    src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Cinderella_Castle%2C_Magic_Kingdom_%282026%29_%28square_crop%29.jpg"
+                    alt="Disney Cinderella Castle"
                 >
 
                 <div class="theme-content">
+
                     <div class="theme-icon">
                         🏰✨
                     </div>
@@ -548,7 +558,9 @@
                     <p class="theme-description">
                         ✨ Enter a magical coding adventure!
                     </p>
+
                 </div>
+
             </div>
 
         </div>
@@ -998,11 +1010,17 @@
         if (theme === "f1") {
             complete.classList.add("f1-complete");
 
-            complete.style.background =
-                "linear-gradient(135deg, #050505, #111111, #1f2937)";
+            complete.style.setProperty(
+                "background",
+                "linear-gradient(135deg, #050505, #111111, #1f2937)",
+                "important"
+            );
 
-            complete.style.color =
-                "#ffffff";
+            complete.style.setProperty(
+                "color",
+                "#ffffff",
+                "important"
+            );
 
             complete
                 .querySelectorAll("h2, h3, p, strong, span")
@@ -1039,15 +1057,21 @@
         } else {
             complete.classList.remove("f1-complete");
 
-            complete.style.background =
+            complete.style.setProperty(
+                "background",
                 "linear-gradient(135deg, " +
                 selected.background1 +
                 ", " +
                 selected.background2 +
-                ")";
+                ")",
+                "important"
+            );
 
-            complete.style.color =
-                "#222222";
+            complete.style.setProperty(
+                "color",
+                "#222222",
+                "important"
+            );
 
             complete
                 .querySelectorAll("h2, h3, p, strong, span")
