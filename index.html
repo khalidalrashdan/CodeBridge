@@ -69,14 +69,14 @@
             border: 2px solid #374151;
         }
 
-        /* BLACK TEXT BOXES WITH WHITE TEXT */
         textarea {
             width: 100%;
             min-height: 130px;
             padding: 15px;
             margin-top: 10px;
-            background-color: #000000;
-            color: white;
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
             border: 2px solid #2563eb;
             border-radius: 10px;
             font-family: "Courier New", monospace;
@@ -84,39 +84,43 @@
             box-sizing: border-box;
             resize: vertical;
             outline: none;
-            caret-color: white;
+            caret-color: #ffffff;
         }
 
         textarea::placeholder {
-            color: #9ca3af;
+            color: #9ca3af !important;
+            -webkit-text-fill-color: #9ca3af !important;
         }
 
         textarea:focus {
             border-color: #22c55e;
             box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
-            color: white;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
         }
 
-        /* NAME INPUT WITH WHITE TEXT */
-        input {
+        input[type="text"] {
             padding: 12px;
             width: 260px;
-            background-color: #000000;
-            color: white;
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
             border: 2px solid #93c5fd;
             border-radius: 8px;
             font-size: 16px;
             outline: none;
-            caret-color: white;
+            caret-color: #ffffff;
         }
 
-        input::placeholder {
-            color: #9ca3af;
+        input[type="text"]::placeholder {
+            color: #9ca3af !important;
+            -webkit-text-fill-color: #9ca3af !important;
         }
 
-        input:focus {
+        input[type="text"]:focus {
             border-color: #2563eb;
-            color: white;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
         }
 
         button {
@@ -226,8 +230,6 @@
 
     <hr>
 
-    <!-- LESSON 1 -->
-
     <div class="lesson">
 
         <h2>📦 Lesson 1: Variables</h2>
@@ -271,8 +273,6 @@
     </div>
 
     <hr>
-
-    <!-- LESSON 2 -->
 
     <div class="lesson">
 
@@ -322,8 +322,6 @@
 
     <hr>
 
-    <!-- LESSON 3 -->
-
     <div class="lesson">
 
         <h2>🤔 Lesson 3: If Statements</h2>
@@ -371,8 +369,6 @@
     </div>
 
     <hr>
-
-    <!-- LESSON 4 -->
 
     <div class="lesson">
 
@@ -422,8 +418,6 @@
     </div>
 
     <hr>
-
-    <!-- COURSE COMPLETE -->
 
     <div class="complete">
 
@@ -528,8 +522,6 @@
 
         let isCorrect = false;
 
-        /* Lesson 1 */
-
         if (questionNumber === 1) {
 
             if (
@@ -549,8 +541,6 @@
 
             }
         }
-
-        /* Lesson 2 */
 
         if (questionNumber === 2) {
 
@@ -572,8 +562,6 @@
             }
         }
 
-        /* Lesson 3 */
-
         if (questionNumber === 3) {
 
             if (
@@ -594,8 +582,6 @@
             }
         }
 
-        /* Lesson 4 */
-
         if (questionNumber === 4) {
 
             if (
@@ -615,8 +601,6 @@
 
             }
         }
-
-        /* Update score */
 
         if (isCorrect) {
 
