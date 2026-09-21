@@ -6,26 +6,42 @@
     <title>CodeBridge - Java Fundamentals</title>
 
     <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #22c55e;
+            --background1: #dbeafe;
+            --background2: #eef2ff;
+            --background3: #f0fdf4;
+            --card: #ffffff;
+            --lesson: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #dbeafe, #eef2ff, #f0fdf4);
+            background: linear-gradient(135deg, var(--background1), var(--background2), var(--background3));
             margin: 0;
             padding: 0;
             color: #222;
+            transition: 0.5s;
         }
 
         .container {
             width: 80%;
             max-width: 900px;
             margin: 40px auto;
-            background: white;
+            background: var(--card);
             padding: 35px;
             border-radius: 20px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
-            color: #2563eb;
+            color: var(--primary);
             text-align: center;
             font-size: 42px;
             margin-bottom: 5px;
@@ -33,40 +49,99 @@
 
         .main-title {
             text-align: center;
-            color: #1e3a8a;
+            color: var(--secondary);
         }
 
         .welcome {
             text-align: center;
-            padding: 20px;
-            background: #eff6ff;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 15px;
+        }
+
+        .theme-title {
+            margin-top: 25px;
+            color: var(--primary);
+        }
+
+        .theme-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .theme-card {
+            width: 180px;
+            min-height: 130px;
+            padding: 20px;
+            border: 3px solid #d1d5db;
+            border-radius: 15px;
+            cursor: pointer;
+            background: white;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .theme-card.selected {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .theme-icon {
+            font-size: 42px;
+        }
+
+        .theme-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 8px;
         }
 
         .lesson {
             margin-top: 30px;
             padding: 25px;
-            border-left: 6px solid #2563eb;
-            background-color: #f8fafc;
+            border-left: 6px solid var(--primary);
+            background-color: var(--lesson);
             border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .lesson:hover {
+            transform: translateY(-2px);
         }
 
         .lesson h2 {
-            color: #1d4ed8;
+            color: var(--primary);
         }
 
         h3 {
             color: #333;
         }
 
-        pre {
-            background-color: #111827;
-            color: #ffffff;
+        pre,
+        pre code {
+            background-color: #111827 !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
             padding: 18px;
             border-radius: 10px;
             overflow-x: auto;
             font-size: 15px;
             border: 2px solid #374151;
+            font-family: "Courier New", monospace;
+        }
+
+        pre code {
+            padding: 0;
+            border: none;
         }
 
         textarea {
@@ -77,11 +152,10 @@
             background-color: #000000 !important;
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            border: 2px solid #2563eb;
+            border: 2px solid var(--primary);
             border-radius: 10px;
             font-family: "Courier New", monospace;
             font-size: 16px;
-            box-sizing: border-box;
             resize: vertical;
             outline: none;
             caret-color: #ffffff;
@@ -93,10 +167,8 @@
         }
 
         textarea:focus {
-            border-color: #22c55e;
+            border-color: var(--accent);
             box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
         }
 
         input[type="text"] {
@@ -105,7 +177,7 @@
             background-color: #000000 !important;
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            border: 2px solid #93c5fd;
+            border: 2px solid var(--primary);
             border-radius: 8px;
             font-size: 16px;
             outline: none;
@@ -118,13 +190,11 @@
         }
 
         input[type="text"]:focus {
-            border-color: #2563eb;
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
+            border-color: var(--secondary);
         }
 
         button {
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
             padding: 13px 22px;
@@ -139,6 +209,94 @@
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .game-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .stat {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 25px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .xp-container {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .xp-bar {
+            height: 18px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .xp-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            border-radius: 20px;
+            transition: width 0.5s;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .badge {
+            padding: 10px 15px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .badge.unlocked {
+            background: linear-gradient(135deg, #fbbf24, #f97316);
+            color: white;
+            animation: badgePop 0.5s;
+        }
+
+        @keyframes badgePop {
+            0% {
+                transform: scale(0.5);
+            }
+
+            70% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .feedback {
@@ -158,13 +316,19 @@
             text-align: center;
             margin-top: 40px;
             padding: 30px;
-            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            background: linear-gradient(135deg, var(--background1), var(--background2));
             border-radius: 15px;
-            border: 2px solid #93c5fd;
+            border: 2px solid var(--primary);
         }
 
-        .emoji-title {
+        .complete-icon {
+            font-size: 65px;
+        }
+
+        .celebration {
             font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
         }
 
         hr {
@@ -179,6 +343,31 @@
 
         strong {
             color: #1e40af;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .theme-message {
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--primary);
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .game-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .theme-card {
+                width: 140px;
+            }
         }
     </style>
 </head>
@@ -198,13 +387,57 @@
         <h2>👋 Welcome to CodeBridge!</h2>
 
         <p>
-            Learn the fundamentals of Java through
-            <strong>four simple lessons</strong>. ☕💻
+            Learn Java by completing challenges,
+            earning XP, unlocking badges and leveling up!
         </p>
 
+        <h2 class="theme-title">
+            🎮 Choose Your Adventure
+        </h2>
+
         <p>
-            🧠 Learn • 💻 Code • 🏆 Complete
+            Choose a theme before starting your course.
         </p>
+
+        <div class="theme-container">
+
+            <div
+                class="theme-card"
+                id="theme-f1"
+                onclick="selectTheme('f1')"
+            >
+                <div class="theme-icon">🏎️</div>
+                <div class="theme-name">F1 Racing</div>
+                <p>Race to Java mastery!</p>
+            </div>
+
+            <div
+                class="theme-card"
+                id="theme-football"
+                onclick="selectTheme('football')"
+            >
+                <div class="theme-icon">⚽</div>
+                <div class="theme-name">Football</div>
+                <p>Score Java goals!</p>
+            </div>
+
+            <div
+                class="theme-card"
+                id="theme-disney"
+                onclick="selectTheme('disney')"
+            >
+                <div class="theme-icon">🏰</div>
+                <div class="theme-name">Disney Magic</div>
+                <p>Enter the magic!</p>
+            </div>
+
+        </div>
+
+        <p id="themeMessage" class="theme-message">
+            🎮 Choose your theme to begin!
+        </p>
+
+        <br>
 
         <label for="studentName">
             <strong>👤 Enter your name:</strong>
@@ -228,6 +461,72 @@
 
     </div>
 
+    <div id="gameArea" class="hidden">
+
+        <div class="game-panel">
+
+            <div class="stat">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-number" id="xp">0</div>
+                <div class="stat-label">XP</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-number" id="level">1</div>
+                <div class="stat-label">LEVEL</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-number" id="score">0</div>
+                <div class="stat-label">SCORE</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-number" id="streak">0</div>
+                <div class="stat-label">STREAK</div>
+            </div>
+
+        </div>
+
+        <div class="xp-container">
+
+            <strong>⭐ Level Progress</strong>
+
+            <div class="xp-bar">
+                <div class="xp-fill" id="xpFill"></div>
+            </div>
+
+            <p id="xpText">
+                0 / 100 XP to next level
+            </p>
+
+        </div>
+
+        <div class="badge-container">
+
+            <div class="badge" id="badge1">
+                🌱 Beginner
+            </div>
+
+            <div class="badge" id="badge2">
+                💻 First Code
+            </div>
+
+            <div class="badge" id="badge3">
+                🔥 On Fire
+            </div>
+
+            <div class="badge" id="badge4">
+                🏆 Java Master
+            </div>
+
+        </div>
+
+    </div>
+
     <hr>
 
     <div class="lesson">
@@ -240,7 +539,7 @@
 
         <p>💡 <strong>Example:</strong></p>
 
-        <pre>int age = 15;</pre>
+        <pre><code>int age = 15;</code></pre>
 
         <p>
             Here, <strong>age</strong> stores the number
@@ -332,9 +631,9 @@
 
         <p>💡 <strong>Example:</strong></p>
 
-        <pre>if (age >= 18) {
+        <pre><code>if (age &gt;= 18) {
     System.out.println("Adult");
-}</pre>
+}</code></pre>
 
         <h3>✏️ Question</h3>
 
@@ -348,7 +647,7 @@
             If the condition is true, the program should print:
         </p>
 
-        <pre>Adult</pre>
+        <pre><code>Adult</code></pre>
 
         <p><strong>💻 Your answer:</strong></p>
 
@@ -380,9 +679,9 @@
 
         <p>💡 <strong>Example:</strong></p>
 
-        <pre>for (int i = 0; i < 5; i++) {
+        <pre><code>for (int i = 0; i &lt; 5; i++) {
     System.out.println(i);
-}</pre>
+}</code></pre>
 
         <h3>✏️ Question</h3>
 
@@ -421,33 +720,44 @@
 
     <div class="complete">
 
-        <h2>🎓 Course Complete!</h2>
+        <div class="complete-icon">🎓</div>
+
+        <h2>Course Complete!</h2>
 
         <h3>🎉 Congratulations!</h3>
 
         <p>
-            You completed all 4 lessons.
+            You completed all 4 Java challenges.
         </p>
 
         <p>
-            📚 <strong>Course:</strong> Java Fundamentals
+            👤 <strong>Player:</strong>
+            <span id="finalName">Player</span>
         </p>
 
         <p>
-            📈 <strong>Progress:</strong>
-            <span id="progress">
-                0 / 4 lessons completed
-            </span>
+            🎮 <strong>Theme:</strong>
+            <span id="finalTheme">Adventure</span>
         </p>
 
         <p>
-            🏆 <strong>Score:</strong>
-            <span id="score">
-                0 / 4
-            </span>
+            ⭐ <strong>Total XP:</strong>
+            <span id="finalXP">0</span>
         </p>
 
-        <h2>🎉🥳 Congratulations! 🥳🎉</h2>
+        <p>
+            🏆 <strong>Final Score:</strong>
+            <span id="finalScore">0 / 4</span>
+        </p>
+
+        <p>
+            📈 <strong>Final Level:</strong>
+            <span id="finalLevel">1</span>
+        </p>
+
+        <p class="celebration" id="celebrationMessage">
+            🎉🥳 Amazing work! 🥳🎉
+        </p>
 
         <p>
             You completed the CodeBridge Java Fundamentals course!
@@ -466,177 +776,246 @@
 </div>
 
 <script>
-
     let completedLessons = 0;
     let score = 0;
+    let xp = 0;
+    let level = 1;
+    let streak = 0;
+    let selectedTheme = "";
+
+    const themes = {
+        f1: {
+            name: "F1 Racing",
+            primary: "#e10600",
+            secondary: "#111111",
+            accent: "#ffcc00",
+            background1: "#1f2937",
+            background2: "#374151",
+            background3: "#111827",
+            lesson: "#f3f4f6"
+        },
+
+        football: {
+            name: "Football",
+            primary: "#15803d",
+            secondary: "#166534",
+            accent: "#facc15",
+            background1: "#dcfce7",
+            background2: "#bbf7d0",
+            background3: "#ecfccb",
+            lesson: "#f0fdf4"
+        },
+
+        disney: {
+            name: "Disney Magic",
+            primary: "#7c3aed",
+            secondary: "#ec4899",
+            accent: "#facc15",
+            background1: "#ede9fe",
+            background2: "#fce7f3",
+            background3: "#fef3c7",
+            lesson: "#faf5ff"
+        }
+    };
+
+    function selectTheme(theme) {
+        selectedTheme = theme;
+
+        document.querySelectorAll(".theme-card").forEach(card => {
+            card.classList.remove("selected");
+        });
+
+        document.getElementById("theme-" + theme).classList.add("selected");
+
+        const selected = themes[theme];
+
+        document.documentElement.style.setProperty("--primary", selected.primary);
+        document.documentElement.style.setProperty("--secondary", selected.secondary);
+        document.documentElement.style.setProperty("--accent", selected.accent);
+        document.documentElement.style.setProperty("--background1", selected.background1);
+        document.documentElement.style.setProperty("--background2", selected.background2);
+        document.documentElement.style.setProperty("--background3", selected.background3);
+        document.documentElement.style.setProperty("--lesson", selected.lesson);
+
+        document.getElementById("themeMessage").innerHTML =
+            "🎮 Theme selected: " + selected.name + "!";
+    }
 
     function startCourse() {
+        const name = document.getElementById("studentName").value;
+        const message = document.getElementById("welcomeMessage");
 
-        let name =
-            document.getElementById("studentName").value;
-
-        let message =
-            document.getElementById("welcomeMessage");
+        if (selectedTheme === "") {
+            message.innerHTML = "⚠️ Please choose a theme first.";
+            message.className = "incorrect";
+            return;
+        }
 
         if (name.trim() === "") {
-
-            message.innerHTML =
-                "⚠️ Please enter your name.";
-
-            message.className =
-                "incorrect";
-
-        } else {
-
-            message.innerHTML =
-                "🎉 Welcome, " + name +
-                "! Good luck with the course! 🚀";
-
-            message.className =
-                "correct";
+            message.innerHTML = "⚠️ Please enter your name.";
+            message.className = "incorrect";
+            return;
         }
+
+        message.innerHTML =
+            "🎉 Welcome, " + name + "! Your adventure begins now! 🚀";
+
+        message.className = "correct";
+
+        document.getElementById("gameArea").classList.remove("hidden");
+
+        document.getElementById("finalName").innerHTML = name;
+        document.getElementById("finalTheme").innerHTML =
+            themes[selectedTheme].name;
+
+        addXP(10);
     }
 
     function cleanCode(code) {
-
         return code
             .toLowerCase()
             .replace(/\s+/g, "")
             .trim();
+    }
 
+    function addXP(amount) {
+        xp += amount;
+
+        level = Math.floor(xp / 100) + 1;
+
+        document.getElementById("xp").innerHTML = xp;
+        document.getElementById("level").innerHTML = level;
+
+        const currentLevelXP = xp % 100;
+
+        document.getElementById("xpFill").style.width =
+            currentLevelXP + "%";
+
+        document.getElementById("xpText").innerHTML =
+            currentLevelXP + " / 100 XP to next level";
+
+        document.getElementById("finalXP").innerHTML = xp;
+        document.getElementById("finalLevel").innerHTML = level;
+
+        updateBadges();
+    }
+
+    function updateBadges() {
+        if (xp >= 10) {
+            document.getElementById("badge1").classList.add("unlocked");
+        }
+
+        if (score >= 1) {
+            document.getElementById("badge2").classList.add("unlocked");
+        }
+
+        if (streak >= 3) {
+            document.getElementById("badge3").classList.add("unlocked");
+        }
+
+        if (completedLessons === 4) {
+            document.getElementById("badge4").classList.add("unlocked");
+        }
     }
 
     function checkAnswer(questionNumber) {
+        const answer =
+            document.getElementById("answer" + questionNumber).value;
 
-        let answer =
-            document.getElementById(
-                "answer" + questionNumber
-            ).value;
+        const feedback =
+            document.getElementById("feedback" + questionNumber);
 
-        let feedback =
-            document.getElementById(
-                "feedback" + questionNumber
-            );
-
-        let code = cleanCode(answer);
+        const code = cleanCode(answer);
 
         let isCorrect = false;
 
         if (questionNumber === 1) {
-
             if (
                 code === "intage=15;" ||
                 code === "intage=15"
             ) {
-
                 isCorrect = true;
-
                 feedback.innerHTML =
-                    "🎉 Correct! Great job! You created the age variable correctly.";
-
+                    "🎉 Correct! +25 XP! Great job!";
             } else {
-
                 feedback.innerHTML =
                     "❌ Not quite. Try: int age = 15;";
-
             }
         }
 
         if (questionNumber === 2) {
-
             if (
                 code.includes("stringname=") &&
                 code.includes("\"")
             ) {
-
                 isCorrect = true;
-
                 feedback.innerHTML =
-                    "🎉 Correct! You created a String variable called name.";
-
+                    "🎉 Correct! +25 XP! You created a String variable.";
             } else {
-
                 feedback.innerHTML =
                     '❌ Not quite. Try: String name = "YourName";';
-
             }
         }
 
         if (questionNumber === 3) {
-
             if (
                 code.includes("if(age>=18)") &&
                 code.includes("system.out.println(\"adult\")")
             ) {
-
                 isCorrect = true;
-
                 feedback.innerHTML =
-                    "🎉 Correct! Your if statement works perfectly.";
-
+                    "🎉 Correct! +25 XP! Your if statement works perfectly.";
             } else {
-
                 feedback.innerHTML =
                     '❌ Check the condition age >= 18 and print "Adult".';
-
             }
         }
 
         if (questionNumber === 4) {
-
             if (
                 code.includes("for(inti=0;i<5;i++)") &&
                 code.includes("system.out.println(i)")
             ) {
-
                 isCorrect = true;
-
                 feedback.innerHTML =
-                    "🎉 Correct! Your loop runs 5 times and prints i.";
-
+                    "🎉 Correct! +25 XP! Your loop works perfectly.";
             } else {
-
                 feedback.innerHTML =
                     "❌ Check that the loop starts at 0, uses i < 5, increases i by 1, and prints i.";
-
             }
         }
 
         if (isCorrect) {
-
-            feedback.className =
-                "feedback correct";
+            feedback.className = "feedback correct";
 
             if (!feedback.dataset.completed) {
-
                 completedLessons++;
                 score++;
+                streak++;
 
-                feedback.dataset.completed =
-                    "true";
+                addXP(25);
 
-                document.getElementById(
-                    "progress"
-                ).innerHTML =
-                    completedLessons +
-                    " / 4 lessons completed";
+                feedback.dataset.completed = "true";
 
-                document.getElementById(
-                    "score"
-                ).innerHTML =
-                    score + " / 4";
+                document.getElementById("score").innerHTML = score;
+                document.getElementById("streak").innerHTML = streak;
 
+                if (completedLessons === 4) {
+                    document.getElementById("celebrationMessage").innerHTML =
+                        "🎉🏆🥳 YOU ARE A JAVA MASTER! 🥳🏆🎉";
+
+                    updateBadges();
+                }
             }
-
         } else {
-
-            feedback.className =
-                "feedback incorrect";
-
+            feedback.className = "feedback incorrect";
+            streak = 0;
+            document.getElementById("streak").innerHTML = streak;
         }
 
+        document.getElementById("finalScore").innerHTML =
+            score + " / 4";
     }
-
 </script>
 
 </body>
