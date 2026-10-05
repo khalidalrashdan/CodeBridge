@@ -1,0 +1,4 @@
+<?php
+declare(strict_types=1);require_once __DIR__.'/../config/bootstrap.php';requireRole('tutor');header('Content-Type: application/json; charset=utf-8');$uid=userId();$action=$_POST['action']??$_GET['action']??'list';
+if($action==='requests'){$s=$pdo->query("SELECT tr.id,tr.preferred_date,tr.preferred_time,tr.status,tr.notes,tr.amount_bhd,u.full_name student,c.title_en course FROM tutoring_requests tr JOIN users u ON u.id=tr.student_id JOIN courses c ON c.id=tr.course_id WHERE tr.status IN ('requested','scheduled') ORDER BY tr.created_at DESC");echo json_encode($s->fetchAll());exit;}
+if($action==='update'){$id=(int)$_POST['id'];$status=$_POST['status']??'scheduled';checkCsrf($_POST['csrf']??null);if(!in_array($status,['scheduled','completed','cancelled'],true))exit; $s=$pdo->prepare('UPDATE tutoring_requests SET status=? WHERE id=?');$s->execute([$status,$id]);echo json_encode(['success'=>true]);exit;}

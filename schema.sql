@@ -1,0 +1,84 @@
+CREATE DATABASE IF NOT EXISTS codebridge CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE codebridge;
+
+CREATE TABLE users (
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ full_name VARCHAR(120) NOT NULL,
+ email VARCHAR(190) NOT NULL UNIQUE,
+ password_hash VARCHAR(255) NOT NULL,
+ role ENUM('student','parent','tutor','admin') NOT NULL DEFAULT 'student',
+ language ENUM('en','ar') NOT NULL DEFAULT 'en',
+ xp INT NOT NULL DEFAULT 0,
+ level INT NOT NULL DEFAULT 1,
+ streak INT NOT NULL DEFAULT 0,
+ link_code VARCHAR(32) UNIQUE NULL,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE parent_student(parent_id INT NOT NULL,student_id INT NOT NULL,PRIMARY KEY(parent_id,student_id),FOREIGN KEY(parent_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE courses(id INT AUTO_INCREMENT PRIMARY KEY,slug VARCHAR(60) NOT NULL UNIQUE,title_en VARCHAR(120) NOT NULL,title_ar VARCHAR(120) NOT NULL,description_en TEXT NOT NULL,description_ar TEXT NOT NULL,price_bhd DECIMAL(6,2) NOT NULL DEFAULT 25,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP) ENGINE=InnoDB;
+CREATE TABLE lessons(id INT AUTO_INCREMENT PRIMARY KEY,course_id INT NOT NULL,lesson_order INT NOT NULL,title_en VARCHAR(150) NOT NULL,title_ar VARCHAR(150) NOT NULL,explanation_en TEXT NOT NULL,explanation_ar TEXT NOT NULL,FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE questions(id INT AUTO_INCREMENT PRIMARY KEY,lesson_id INT NOT NULL,question_order INT NOT NULL,prompt_en TEXT NOT NULL,prompt_ar TEXT NOT NULL,starter_code TEXT NULL,expected_answer TEXT NOT NULL,xp_reward INT NOT NULL DEFAULT 25,FOREIGN KEY(lesson_id) REFERENCES lessons(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE enrollments(id INT AUTO_INCREMENT PRIMARY KEY,student_id INT NOT NULL,course_id INT NOT NULL,amount_bhd DECIMAL(6,2) NOT NULL,status ENUM('pending','paid','cancelled') NOT NULL DEFAULT 'pending',enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE KEY student_course(student_id,course_id),FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE answers(id INT AUTO_INCREMENT PRIMARY KEY,student_id INT NOT NULL,question_id INT NOT NULL,answer TEXT NOT NULL,is_correct TINYINT(1) NOT NULL DEFAULT 0,attempts INT NOT NULL DEFAULT 1,answered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE KEY student_question(student_id,question_id),FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(question_id) REFERENCES questions(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE progress(id INT AUTO_INCREMENT PRIMARY KEY,student_id INT NOT NULL,course_id INT NOT NULL,completed_lessons INT NOT NULL DEFAULT 0,total_lessons INT NOT NULL DEFAULT 0,percent_complete DECIMAL(5,2) NOT NULL DEFAULT 0,updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,UNIQUE KEY student_course_progress(student_id,course_id),FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE achievements(id INT AUTO_INCREMENT PRIMARY KEY,slug VARCHAR(80) UNIQUE NOT NULL,name_en VARCHAR(120) NOT NULL,name_ar VARCHAR(120) NOT NULL,description_en VARCHAR(255) NOT NULL,description_ar VARCHAR(255) NOT NULL,xp_requirement INT NOT NULL DEFAULT 0) ENGINE=InnoDB;
+CREATE TABLE student_achievements(student_id INT NOT NULL,achievement_id INT NOT NULL,unlocked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(student_id,achievement_id),FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(achievement_id) REFERENCES achievements(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE tutoring_requests(id INT AUTO_INCREMENT PRIMARY KEY,student_id INT NOT NULL,course_id INT NOT NULL,amount_bhd DECIMAL(6,2) NOT NULL DEFAULT 10,preferred_date DATE NULL,preferred_time TIME NULL,status ENUM('requested','scheduled','completed','cancelled') DEFAULT 'requested',notes TEXT NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE) ENGINE=InnoDB;
+CREATE TABLE payments(id INT AUTO_INCREMENT PRIMARY KEY,student_id INT NOT NULL,course_id INT NOT NULL,tutoring_request_id INT NULL,amount_bhd DECIMAL(6,2) NOT NULL,payment_type ENUM('course','tutoring','course_and_tutoring') NOT NULL,status ENUM('pending','paid','failed','refunded') DEFAULT 'pending',reference_code VARCHAR(100),paid_at TIMESTAMP NULL,FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE,FOREIGN KEY(tutoring_request_id) REFERENCES tutoring_requests(id) ON DELETE SET NULL) ENGINE=InnoDB;
+CREATE TABLE messages(id INT AUTO_INCREMENT PRIMARY KEY,sender_id INT NOT NULL,receiver_id INT NOT NULL,body TEXT NOT NULL,is_read TINYINT(1) DEFAULT 0,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(sender_id) REFERENCES users(id) ON DELETE CASCADE,FOREIGN KEY(receiver_id) REFERENCES users(id) ON DELETE CASCADE) ENGINE=InnoDB;
+
+INSERT INTO courses(slug,title_en,title_ar,description_en,description_ar,price_bhd) VALUES
+('html','HTML','HTML','Build structured web pages.','بناء صفحات ويب منظمة.',25),
+('css','CSS','CSS','Design responsive interfaces.','تصميم واجهات متجاوبة.',25),
+('javascript','JavaScript','JavaScript','Program interactive web applications.','برمجة تطبيقات ويب تفاعلية.',25),
+('php','PHP','PHP','Build server-side web applications.','بناء تطبيقات ويب من جانب الخادم.',25),
+('java','Java Fundamentals','أساسيات Java','Learn Java and object-oriented programming.','تعلم Java والبرمجة الكائنية.',25);
+
+INSERT INTO achievements(slug,name_en,name_ar,description_en,description_ar,xp_requirement) VALUES
+('beginner','Beginner','مبتدئ','Start your CodeBridge journey.','ابدأ رحلتك في CodeBridge.',10),
+('first-code','First Code','أول كود','Complete your first challenge.','أكمل أول تحدٍ.',25),
+('on-fire','On Fire','متوهج','Reach 75 XP.','حقق 75 XP.',75),
+('course-master','Course Master','متقن الدورة','Reach 100 XP.','حقق 100 XP.',100);
+
+-- Starter Java content; expand all five curricula in the admin/database as your project grows.
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,1,'Variables','المتغيرات','A variable stores data. Example: int age = 15;','المتغير يخزن البيانات. مثال: int age = 15;' FROM courses WHERE slug='java';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create an integer variable called age and assign 15.','أنشئ متغيرًا صحيحًا باسم age وأسند إليه 15.',NULL,'int age = 15;',25 FROM lessons WHERE title_en='Variables' AND course_id=(SELECT id FROM courses WHERE slug='java');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,2,'Data Types','أنواع البيانات','Java supports String, int, double and boolean.','تدعم Java أنواع String وint وdouble وboolean.' FROM courses WHERE slug='java';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create a String variable called name and store Ali in it.','أنشئ String باسم name وخزن فيه Ali.',NULL,'String name = "Ali";',25 FROM lessons WHERE title_en='Data Types' AND course_id=(SELECT id FROM courses WHERE slug='java');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,3,'If Statements','جمل if','Use if to make decisions.','استخدم if لاتخاذ القرارات.' FROM courses WHERE slug='java';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Check if age is at least 18 and print Adult.','تحقق أن age أكبر من أو يساوي 18 واطبع Adult.',NULL,'if(age>=18){System.out.println("Adult");}',25 FROM lessons WHERE title_en='If Statements' AND course_id=(SELECT id FROM courses WHERE slug='java');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,4,'Loops','الحلقات','A for loop repeats code.','حلقة for تكرر التعليمات.' FROM courses WHERE slug='java';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Write a for loop from 0 to 4 that prints i.','اكتب حلقة for من 0 إلى 4 تطبع i.',NULL,'for(int i=0;i<5;i++){System.out.println(i);}',25 FROM lessons WHERE title_en='Loops' AND course_id=(SELECT id FROM courses WHERE slug='java');
+
+-- Basic sample lessons for the other courses.
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,1,'HTML Elements','عناصر HTML','HTML elements structure content using tags.','تنظم عناصر HTML المحتوى باستخدام الوسوم.' FROM courses WHERE slug='html';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Write an h1 element containing Hello.','اكتب عنصر h1 يحتوي Hello.',NULL,'<h1>Hello</h1>',25 FROM lessons WHERE title_en='HTML Elements' AND course_id=(SELECT id FROM courses WHERE slug='html');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,1,'Selectors','المحددات','CSS selectors choose elements to style.','محددات CSS تختار العناصر لتنسيقها.' FROM courses WHERE slug='css';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Write a CSS rule that makes p text bold.','اكتب قاعدة CSS تجعل نص p عريضًا.',NULL,'p{font-weight:bold;}',25 FROM lessons WHERE title_en='Selectors' AND course_id=(SELECT id FROM courses WHERE slug='css');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,1,'Variables','المتغيرات','JavaScript variables store values.','متغيرات JavaScript تخزن القيم.' FROM courses WHERE slug='javascript';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create a JavaScript variable named age with value 15.','أنشئ متغير JavaScript باسم age وقيمته 15.',NULL,'let age=15;',25 FROM lessons WHERE title_en='Variables' AND course_id=(SELECT id FROM courses WHERE slug='javascript');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,1,'Variables','المتغيرات','PHP variables begin with $.','متغيرات PHP تبدأ بالرمز $. ' FROM courses WHERE slug='php';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create a PHP variable named age with value 15.','أنشئ متغير PHP باسم age وقيمته 15.',NULL,'$age=15;',25 FROM lessons WHERE title_en='Variables' AND course_id=(SELECT id FROM courses WHERE slug='php');
+
+-- Additional curriculum starter content. Extend these rows for the full final syllabus.
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,2,'Links and Images','الروابط والصور','Use anchors and images to connect and enrich pages.','استخدم الروابط والصور لإثراء الصفحات وربطها.' FROM courses WHERE slug='html';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create a link to https://example.com with text Example.','أنشئ رابطًا إلى https://example.com بالنص Example.',NULL,'<a href="https://example.com">Example</a>',25 FROM lessons WHERE title_en='Links and Images' AND course_id=(SELECT id FROM courses WHERE slug='html');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,3,'Forms','النماذج','Forms collect information from users.','تجمع النماذج المعلومات من المستخدمين.' FROM courses WHERE slug='html';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create a text input named username.','أنشئ input نصيًا باسم username.',NULL,'<input type="text" name="username">',25 FROM lessons WHERE title_en='Forms' AND course_id=(SELECT id FROM courses WHERE slug='html');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,2,'Box Model','نموذج الصندوق','Margin, border, padding and content form the CSS box model.','الهامش والإطار والحشوة والمحتوى تشكل نموذج صندوق CSS.' FROM courses WHERE slug='css';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Set a 10px padding on a div.','اجعل padding للـ div بقيمة 10px.',NULL,'div{padding:10px;}',25 FROM lessons WHERE title_en='Box Model' AND course_id=(SELECT id FROM courses WHERE slug='css');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,3,'Flexbox','Flexbox','Flexbox helps create flexible layouts.','يساعد Flexbox في إنشاء تخطيطات مرنة.' FROM courses WHERE slug='css';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Make a div a flex container.','اجعل div حاوية flex.',NULL,'div{display:flex;}',25 FROM lessons WHERE title_en='Flexbox' AND course_id=(SELECT id FROM courses WHERE slug='css');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,2,'Functions','الدوال','Functions group reusable JavaScript logic.','تجمع الدوال منطق JavaScript القابل لإعادة الاستخدام.' FROM courses WHERE slug='javascript';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create a function named greet.','أنشئ دالة باسم greet.',NULL,'function greet(){}',25 FROM lessons WHERE title_en='Functions' AND course_id=(SELECT id FROM courses WHERE slug='javascript');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,3,'Arrays','المصفوفات','Arrays store ordered collections of values.','المصفوفات تخزن مجموعة مرتبة من القيم.' FROM courses WHERE slug='javascript';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create an array containing 1, 2 and 3.','أنشئ مصفوفة تحتوي 1 و2 و3.',NULL,'let nums=[1,2,3];',25 FROM lessons WHERE title_en='Arrays' AND course_id=(SELECT id FROM courses WHERE slug='javascript');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,2,'Conditions','الشروط','PHP uses if statements for decisions.','تستخدم PHP جمل if لاتخاذ القرارات.' FROM courses WHERE slug='php';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Write a PHP if statement checking age >= 18.','اكتب if في PHP تتحقق من age >= 18.',NULL,'if($age>=18){}',25 FROM lessons WHERE title_en='Conditions' AND course_id=(SELECT id FROM courses WHERE slug='php');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,3,'Functions','الدوال','PHP functions package reusable server-side logic.','دوال PHP تجمع منطق الخادم القابل لإعادة الاستخدام.' FROM courses WHERE slug='php';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Create a PHP function named greet.','أنشئ دالة PHP باسم greet.',NULL,'function greet(){}',25 FROM lessons WHERE title_en='Functions' AND course_id=(SELECT id FROM courses WHERE slug='javascript');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,5,'Methods','الدوال داخل الأصناف','Methods are functions defined inside classes.','الدوال داخل الأصناف هي وظائف معرفة داخل class.' FROM courses WHERE slug='java';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Declare a public method named greet.','عرّف method عامة باسم greet.',NULL,'public void greet(){}',25 FROM lessons WHERE title_en='Methods' AND course_id=(SELECT id FROM courses WHERE slug='java');
+INSERT INTO lessons(course_id,lesson_order,title_en,title_ar,explanation_en,explanation_ar) SELECT id,6,'Classes','الأصناف','Classes define objects and their behavior.','تعرّف الأصناف الكائنات وسلوكها.' FROM courses WHERE slug='java';
+INSERT INTO questions(lesson_id,question_order,prompt_en,prompt_ar,starter_code,expected_answer,xp_reward) SELECT id,1,'Declare a class named Student.','عرّف class باسم Student.',NULL,'class Student{}',25 FROM lessons WHERE title_en='Classes' AND course_id=(SELECT id FROM courses WHERE slug='java');

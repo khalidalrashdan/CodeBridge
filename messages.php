@@ -1,0 +1,4 @@
+<?php
+declare(strict_types=1);require_once __DIR__.'/../config/bootstrap.php';requireLogin();header('Content-Type: application/json; charset=utf-8');$uid=userId();$action=$_POST['action']??$_GET['action']??'list';
+if($action==='send'){checkCsrf($_POST['csrf']??null);$to=(int)$_POST['to_user_id'];$body=trim($_POST['body']??'');if(!$body)exit; $s=$pdo->prepare('INSERT INTO messages(sender_id,receiver_id,body) VALUES(?,?,?)');$s->execute([$uid,$to,$body]);echo json_encode(['success'=>true]);exit;}
+$other=(int)($_GET['with']??0);$s=$pdo->prepare('SELECT m.*,u.full_name sender_name FROM messages m JOIN users u ON u.id=m.sender_id WHERE (sender_id=? AND receiver_id=?) OR (sender_id=? AND receiver_id=?) ORDER BY m.created_at');$s->execute([$uid,$other,$other,$uid]);echo json_encode($s->fetchAll());
